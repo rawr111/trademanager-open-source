@@ -1,0 +1,53 @@
+.account-item {
+  display: flex;
+  width: 100%;
+  min-height: 40px;
+  background: #372447;
+  border-radius: 10px;
+  margin-bottom: 5px;
+  padding-left: 6px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.account-item:last-child {
+  margin-bottom: 0px;
+}
+
+.account-logo {
+  border-radius: 20px;
+  border: 1px solid gray;
+  width: 32px;
+  height: 32px;
+  margin-right: 16px;
+}
+
+.account-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.account-button {
+  height: 39px;
+}
+
+.account-item-text {
+  margin-right: 10px;
+  width: 150px;
+  text-align: center;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.checkbox-default__proxy,
+.checkbox-checked {
+  width: 22px;
+  height: 22px;
+  border-radius: 5px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: inline-block;
+  cursor: pointer;
+  margin-right: 10px;
+}

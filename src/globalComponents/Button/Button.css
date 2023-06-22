@@ -1,0 +1,107 @@
+.button {
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  border: none;
+  justify-content: center;
+}
+
+.button-default {
+  margin-right: 10px;
+}
+
+.button-default:last-child {
+  margin-right: 0px;
+}
+
+.button--dark-pink {
+  background: #7003A3;
+}
+
+.button--gradient {
+  background: linear-gradient(121.85deg, #ff00e5 2.04%, #7000ff 108.41%);
+}
+
+.button--grey {
+  background: #372447;
+}
+
+.button--light-grey {
+  background: #513A65;
+}
+
+.button__text {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  max-width: 90%;
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 19px;
+  color: #ffffff;
+}
+
+.headline-button_gradient {
+  margin-right: 13px;
+  margin-left: 13px;
+}
+
+.button--hoverColor-light-grey:hover {
+  background: #513A65;
+}
+
+.button--hoverColor-grey:hover {
+  background: #372447;
+}
+
+.button--hoverColor-darkPink:hover {
+  background: #7003A3;
+}
+
+.button--hoverColor-gradient:hover {
+  background: linear-gradient(121.85deg, #ff00e5 2.04%, #7000ff 108.41%);
+  box-shadow: 0px 4px 30px rgba(250, 0, 255, 0.47);
+  border-radius: 10px;
+}
+
+.button--hoverColor-grey:hover {
+  background: #4C3560;
+}
+
+.button--view-icon.button--size-small {
+  min-width: 37px;
+  min-height: 37px;
+}
+
+.button--view-icon.button--size-tiny {
+  min-width: 29px;
+  min-height: 29px;
+}
+
+.button--view-icon.button--size-large {
+  min-width: 43px;
+  min-height: 43px;
+}
+
+.button--view-default.button--size-small {
+  min-width: 82px;
+  height: 37px;
+}
+
+.button--view-default.button--size-medium {
+  min-width: 200px;
+  height: 31px;
+}
+
+.button--view-default.button--size-large {
+  min-width: 200px;
+  height: 43px;
+}
+
+.button--view-default .button__icon+.button__text {
+  margin-left: 15px;
+}

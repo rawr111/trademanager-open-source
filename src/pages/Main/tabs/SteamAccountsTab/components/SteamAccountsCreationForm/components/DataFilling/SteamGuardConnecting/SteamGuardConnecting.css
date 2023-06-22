@@ -1,0 +1,26 @@
+.steam-data-code {
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+}
+
+.steam-data-code__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 600px;
+}
+
+.steam-data-code__title {
+  margin-bottom: 14px;
+}
+
+.steam-data-code__button{
+    margin-top: 7px;
+    width: 100%;
+    height: 40px;
+}
+.import-account {
+  margin-top: 30px;
+  align-items: center;
+}

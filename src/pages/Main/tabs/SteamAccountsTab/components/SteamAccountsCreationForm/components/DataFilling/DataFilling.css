@@ -1,0 +1,43 @@
+.imported-steam-accounts .steam-account {
+  padding-left: 35px;
+  padding-right: 35px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background-color: #2c1935;
+  border-radius: 25px;
+  margin-bottom: 5px;
+  display: table-column;
+}
+.imported-steam-accounts {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  height: 400px;
+}
+.imported-steam-accounts_header {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  padding-left: 6px;
+}
+
+.imported-steam-accounts_header-text {
+  width: 157px;
+  line-height: 40px;
+  width: 25%;
+  padding: 0px 5px 0px 5px;
+}
+
+.imported-steam-account__container {
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  padding-right: 5px;
+  max-height: 350px;
+  overflow: auto;
+}
+
+.imported-steam-account-item__container {
+  display: flex;
+  flex-direction: column;
+}
+

@@ -1,0 +1,21 @@
+.columns-selected-item {
+  width: 100%;
+  padding: 0px 16px;
+  display: flex;
+  align-items: center;
+  background: #2c1935;
+  border: 1px solid #2d1e36;
+  border-radius: 10px;
+  height: 40px;
+  margin-bottom: 10px;
+  cursor: grab;
+
+}
+
+.columns-selected-item:last-child{
+  margin-bottom: 0px;
+}
+
+.columns-selected-img {
+  margin-right: 15px;
+}

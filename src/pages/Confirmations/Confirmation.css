@@ -1,0 +1,71 @@
+.confirmation-container {
+  display: flex;
+  flex-direction: column;
+  padding: 17px 19px 30px 24px;
+  min-width: 500px;
+  height: 100%;
+  background: #22142A;
+}
+
+.confirmation-info-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 17px;
+}
+
+.info-account-logo {
+  margin-right: 10px;
+}
+
+.info-account-name {
+  background: #2d1c3a;
+  border-radius: 10px;
+  width: 204px;
+  height: 43px;
+  padding-left: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.sell-items-container {
+  display: flex;
+  flex-direction: column;
+  overflow-x: none;
+  overflow-y: auto;
+  padding-right: 5px;
+  height: 100em;
+}
+
+.sell-items-confirms-button-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+.sell-items-confirms-button-container-small{
+  display: flex;
+}
+.sell-items-confirms-button-container-small button {
+  margin-right: 5px;
+}
+.sell-items-count-selected {
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.confirmation-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding-bottom: 20px;
+}
+.centered-block {
+  padding: 10px;
+  position: absolute; 
+  left: 50%;
+  top: 50%; 
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: 400px;
+}

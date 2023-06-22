@@ -1,0 +1,52 @@
+.sell-item-container {
+  display: flex;
+  padding: 7px;
+  width: 100%;
+  height: 68px;
+  background: #2c1935;
+  border-radius: 16px;
+  margin-bottom: 10px;
+}
+
+.sell-item-container:last-child{
+    margin-bottom: 0px;
+}
+
+.sell-item-logo {
+  background: #372447;
+  border-radius: 16px;
+  height: 53px;
+  width: 53px;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 53px;
+}
+
+.sell-item-info {
+  display: flex;
+  flex-direction: column;
+  padding-top: 1px;
+  width: 100%;
+}
+
+.sell-item-name {
+  line-height: 19px;
+  overflow: hidden;
+}
+
+.sell-item-price-container {
+  display: flex;
+}
+
+.sell-item-price-new {
+  margin-right: 8px;
+}
+
+.sell-item-confirm-container{
+    
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}

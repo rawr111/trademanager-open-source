@@ -1,0 +1,196 @@
+{
+  "name": "trademanager",
+  "author": "Mikhail Gladkikh <vamavama998@gmail.com>",
+  "version": "1.0.0",
+  "description": "TRADEMANAGER",
+  "main": ".webpack/main",
+  "scripts": {
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "release": "electron-forge publish"
+  },
+  "keywords": [],
+  "license": "MIT",
+  "dependencies": {
+    "appdata-path": "^1.0.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "bufferutil": "^4.0.6",
+    "chromium": "^3.0.3",
+    "classnames": "^2.3.2",
+    "crypto": "^1.0.1",
+    "crypto-browserify": "^3.12.0",
+    "crypto-js": "^4.1.1",
+    "easyimage": "^3.1.1",
+    "electron-json-storage": "^4.5.0",
+    "electron-store": "^8.1.0",
+    "fastest-clone": "^1.0.2",
+    "image-file-resize": "^1.0.5",
+    "imagemagick": "^0.1.3",
+    "immutability-helper": "^3.1.1",
+    "json-bigint": "^1.0.0",
+    "lzma": "^2.3.2",
+    "mobx": "^6.6.2",
+    "mobx-react": "^7.5.3",
+    "ncp": "^2.0.0",
+    "playwright": "^1.29.0",
+    "puppeteer": "^19.4.1",
+    "puppeteer-afp": "^1.0.3",
+    "puppeteer-extra": "^3.3.4",
+    "puppeteer-extra-plugin-minmax": "^1.1.2",
+    "puppeteer-extra-plugin-stealth": "^2.11.1",
+    "react": "^17.0.2",
+    "react-beautiful-dnd": "^13.1.1",
+    "react-circular-progressbar": "^2.1.0",
+    "react-dnd": "^16.0.1",
+    "react-dnd-html5-backend": "^16.0.1",
+    "react-dom": "^17.0.2",
+    "react-dropdown": "^1.11.0",
+    "react-hook-form": "^7.37.0",
+    "react-hot-loader": "^4.13.0",
+    "react-loading-icons": "^1.1.0",
+    "react-router-dom": "^6.4.0",
+    "react-tooltip": "^4.5.1",
+    "react-uuid": "^2.0.0",
+    "request": "^2.88.2",
+    "semantic-ui-css": "^2.5.0",
+    "semantic-ui-react": "^2.1.4",
+    "sharp": "^0.31.3",
+    "steam-totp": "^2.1.2",
+    "steam-user": "^4.25.0",
+    "steamcommunity": "^3.44.2",
+    "styled-components": "^5.3.6",
+    "unlazy-loader": "^0.1.3",
+    "unsupported": "^1.1.0",
+    "user-agents": "^1.0.1144",
+    "utf-8-validate": "^5.0.9",
+    "uuid": "^9.0.0",
+    "yarn": "^1.22.19"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.17.8",
+    "@babel/plugin-transform-runtime": "^7.17.0",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-react": "^7.16.7",
+    "@babel/preset-typescript": "^7.16.7",
+    "@electron-forge/cli": "^6.0.0-beta.63",
+    "@electron-forge/maker-deb": "^6.0.0-beta.63",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.63",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.63",
+    "@electron-forge/maker-zip": "^6.0.0-beta.63",
+    "@electron-forge/plugin-webpack": "^6.0.0-beta.63",
+    "@marshallofsound/webpack-asset-relocator-loader": "^0.5.0",
+    "@types/crypto-js": "^4.1.1",
+    "@types/electron-devtools-installer": "2.2.0",
+    "@types/electron-json-storage": "^4.5.0",
+    "@types/ncp": "^2.0.5",
+    "@types/react": "^17.0.50",
+    "@types/react-beautiful-dnd": "^13.1.2",
+    "@types/react-dom": "^17.0.17",
+    "@types/request": "^2.48.8",
+    "@types/steamcommunity": "^3.43.2",
+    "@types/styled-components": "^5.1.26",
+    "@types/user-agents": "^1.0.2",
+    "@types/uuid": "^8.3.4",
+    "babel-loader": "^8.2.4",
+    "copy-webpack-plugin": "^11.0.0",
+    "cross-env": "^7.0.3",
+    "css-loader": "^6.7.1",
+    "electron": "^17.4.11",
+    "file-loader": "^6.2.0",
+    "npm-run-all": "^4.1.5",
+    "style-loader": "^3.3.1",
+    "typescript": "^4.6.2",
+    "wait-on": "^6.0.1",
+    "webpack": "^5.70.0"
+  },
+  "config": {
+    "forge": {
+      "packagerConfig": {
+        "name": "Trademanager",
+        "executableName": "trademanager",
+        "icon": "assets/icon",
+        "extraResource": [
+          "assets"
+        ]
+      },
+      "plugins": [
+        [
+          "@electron-forge/plugin-webpack",
+          {
+            "devContentSecurityPolicy": "default-src * self blob: data: gap:; style-src * self 'unsafe-inline' blob: data: gap:; script-src * 'self' 'unsafe-eval' 'unsafe-inline' blob: data: gap:; object-src * 'self' blob: data: gap:; img-src * self 'unsafe-inline' blob: data: gap:; connect-src self * 'unsafe-inline' blob: data: gap:; frame-src * self blob: data: gap:;",
+            "mainConfig": "./webpack/main.webpack.js",
+            "renderer": {
+              "config": "./webpack/renderer.webpack.js",
+              "entryPoints": [
+                {
+                  "html": "./public/index.html",
+                  "js": "./src/index.tsx",
+                  "name": "main_window",
+                  "preload": {
+                    "js": "./electron/bridges/mainBridge.ts"
+                  }
+                },
+                {
+                  "html": "./public/index.html",
+                  "js": "./src/index.tsx",
+                  "name": "ask_family_pin_window",
+                  "preload": {
+                    "js": "./electron/bridges/askFamilyPinBridge.ts"
+                  }
+                },
+                {
+                  "html": "./public/index.html",
+                  "js": "./src/index.tsx",
+                  "name": "confirmations_window",
+                  "preload": {
+                    "js": "./electron/bridges/confirmationsBridge.ts"
+                  }
+                },
+                {
+                  "html": "./public/index.html",
+                  "js": "./src/index.tsx",
+                  "name": "error_window",
+                  "preload": {
+                    "js": "./electron/bridges/errorWindowBridge.ts"
+                  }
+                },
+                {
+                  "html": "./public/index.html",
+                  "js": "./src/index.tsx",
+                  "name": "auth_window",
+                  "preload": {
+                    "js": "./electron/bridges/authBridge.ts"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      ],
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "ElectronStarter"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {}
+        }
+      ]
+    }
+  }
+}

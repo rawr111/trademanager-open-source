@@ -1,0 +1,13 @@
+.account-creation-navigation{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.account-creation-navigation__accounts{
+    display: flex;
+    background: #372447;
+    border-radius: 10px;
+    padding: 6px 15px;
+    margin-right: 22px;
+}

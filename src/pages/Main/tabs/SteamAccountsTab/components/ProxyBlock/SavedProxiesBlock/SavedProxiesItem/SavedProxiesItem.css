@@ -1,0 +1,41 @@
+.saved-proxies-item-container {
+  display: flex;
+  height: 40px;
+  min-height: 40px;
+  background: #372447;
+  border-radius: 10px;
+  margin-bottom: 5px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.saved-proxies-item-cell{
+  line-height: 40px;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0px 10px;
+  width: 150px;
+}
+
+.saved-proxies-item-wrapper{
+  display: flex;
+  align-items: center;
+}
+
+.checkbox-circle-default,
+.checkbox-circle-checked {
+  width: 22px;
+  height: 22px;
+  border-radius: 5px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: inline-block;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.proxy-account-item-container{
+  display: flex;
+}

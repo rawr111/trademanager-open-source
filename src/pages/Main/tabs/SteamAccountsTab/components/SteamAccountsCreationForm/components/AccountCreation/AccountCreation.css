@@ -1,0 +1,14 @@
+.account-creation_step {
+    padding: 20px;
+    text-align: center;
+}
+
+.account-creation_step .title {
+    font-size: 25pt;
+    margin-bottom: 20px;
+    text-align: left;
+}
+.account-creation_step .text {
+    margin-bottom: 20px;
+    text-align: left;
+}

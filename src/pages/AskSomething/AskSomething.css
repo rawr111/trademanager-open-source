@@ -1,0 +1,44 @@
+.ask-family-pin-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-width: 500px;
+  min-height: 150px;
+  background: #22142A;
+  height: 100%;
+}
+
+.ask-family-pin-account-name {
+  background: #2d1c3a;
+  border-radius: 10px;
+  width: 204px;
+  height: 43px;
+  padding-left: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 30px;
+}
+
+.ask-family-pin-account-logo {
+  margin-right: 10px;
+}
+
+.ask-family-pin-input {
+  background: #372447;
+  border: 1px solid #776284;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  padding-left: 10px;
+  margin-left: 10px;
+  height: 32px;
+  margin-bottom: 30px;
+}
+
+.ask-family-pin-wrapper{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}

@@ -1,0 +1,44 @@
+.steam-data-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.steam-data-title {
+  margin-bottom: 15px;
+}
+
+.steam-data-button {
+  min-width: 324px;
+}
+
+.steam-data-input__container {
+  display: flex;
+  flex-direction: column;
+}
+
+.steam-data-input__wrapper {
+  margin-bottom: 17px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.steam-data-navigation__wrapper {
+  background: #372447;
+  border-radius: 10px;
+  padding: 6px 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.steam-data-input-file {
+  position: absolute;
+  overflow: hidden;
+  display: block;
+  height: 0px;
+  width: 0px;
+}
+
+.steam-data-input__delimener {
+  width: 17px;
+}

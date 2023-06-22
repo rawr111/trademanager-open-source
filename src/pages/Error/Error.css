@@ -1,0 +1,7 @@
+.error-container {
+    padding: 10px 20px 20px 20px;
+}
+.error-container-text {
+    overflow-y: auto;
+    height: calc(100vh - 100px);
+}

@@ -1,0 +1,32 @@
+.footer {
+    min-height: 68px;
+    width: 100%;
+    background: #211228A6;
+    border-radius: 16px;
+    margin-bottom: 17px;
+    padding: 0px 18px 0px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+.footer__accounts-number{
+
+}
+
+.footer__select-number{
+  margin-right: 40px;
+}
+
+.footer__info{
+    margin-left: 5px;
+}
+
+.footer__control{
+  display: flex;
+  align-items: center;
+}
+
+.footer__button{
+  margin-right: 10px;
+}

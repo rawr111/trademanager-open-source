@@ -1,0 +1,35 @@
+.panel {
+  min-height: 80px;
+  border-radius: 16px;
+  background: rgba(33, 18, 40, 0.65);
+  width: 100%;
+  margin-bottom: 14px;
+  padding: 0px 17px 0px 29px;
+  display: flex;
+  align-items: center;
+  user-select: none;
+}
+
+.panel-text_main {
+  margin-right: 30px;
+  white-space: nowrap;
+}
+
+.panel-content {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.panel-content__options {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+}
+
+
+.header-content__buttons-container {
+  display: flex;
+  margin-right: 10px;
+}

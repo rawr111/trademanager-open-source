@@ -1,0 +1,320 @@
+.list-container {
+    display: flex;
+    height: 100%;
+    border-radius: 16px;
+    overflow-y: hidden;
+    align-items: flex-start;
+    background: rgba(33, 18, 40, 0.65);
+    margin-bottom: 15px;
+}
+.list-container .list-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    position: relative;
+    overflow-x: auto;
+
+}
+.list {
+    width: 100%;
+    padding: 10px;
+    display: table;
+    position: absolute;
+    margin-bottom: 17px;
+    border-collapse: separate;
+    border-spacing: 0 5px;
+}
+
+.list-headline-row {
+    display: table-row;
+    height: 60px;
+    position: sticky;
+    top: 0;
+    background: rgba(35,20,44);
+}
+
+.list-headline-container {
+    display: flex;
+    max-height: 52px;
+    margin-bottom: 15px;
+}
+
+.list-headline {
+    display: table-cell;
+    vertical-align: middle;
+    padding-right: 20px;
+}
+
+.list-headline:first-child {
+    padding-left: 15px;
+}
+
+.list-headline:last-child {
+    padding-left: 15px;
+}
+
+.list-headline-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.list-headline__name {
+    min-width: 390px;
+    width: 24%;
+    padding-left: 14px;
+}
+
+.list-headline__name-img {
+    margin-right: 8px;
+}
+
+.list-headline__login {
+    min-width: 185px;
+    width: 12%;
+}
+
+.list-headline__login-img {
+    margin-left: 8px;
+}
+
+.list-headline__password {
+    min-width: 132px;
+    width: 8%;
+}
+
+.list-headline__guard {
+    min-width: 185px;
+    width: 12%;
+}
+
+.list-headline__mail {
+    min-width: 230px;
+    width: 14%;
+}
+
+.list-headline__mail-pass {
+    min-width: 143px;
+    width: 8%;
+}
+
+.list-headline__proxy {
+    min-width: 326px;
+    width: 20%;
+}
+
+.list-item-row {
+    display: table-row;
+    height: 52px;
+    background: #2C1935;
+    border-radius: 36px;
+}
+
+.list-item-container {
+    display: flex;
+    max-height: 52px;
+    margin-bottom: 15px;
+}
+
+.list-item {
+    display: table-cell;
+    vertical-align: middle;
+    padding-right: 20px;
+    max-width: 150px;
+    /* overflow: auto; */
+    white-space: nowrap;
+    overflow-x: hidden;
+}
+
+.list-item:first-child {
+    border-radius: 15px 0 0 15px;
+    padding-left: 15px;
+}
+
+.list-item:last-child {
+    border-radius: 0 15px 15px 0;
+    padding-right: 15px;
+}
+
+.list-item-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.list-item-input__container {}
+
+.list-item-name-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.list-item-name-controls {
+    display: flex;
+    align-items: center;
+    margin-left: 25px;
+}
+
+
+.list-item__name {
+    min-width: 390px;
+    width: 24%;
+    padding-right: 23px;
+    padding-left: 14px;
+}
+
+.list-item__name-img {
+    margin-right: 8px;
+}
+
+.list-item__name-text {
+    max-width: 55%;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip;
+}
+
+.list-item__name-start {
+    cursor: pointer;
+    min-width: 53px;
+    min-height: 29px;
+    background: rgba(55, 154, 94, 0.16);
+    border: 0.5px solid #379a5e;
+    border-radius: 10px;
+    margin-right: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Nunito";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    color: #379a5e;
+}
+
+.list-item__name-stop {
+    cursor: pointer;
+    min-width: 53px;
+    min-height: 29px;
+    background: #740D09;
+    border: 0.5px solid #E53F30;
+    border-radius: 10px;
+    margin-right: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Nunito";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    color: #E53F30;
+}
+
+.list-item__name-copy {
+    min-width: 35px;
+    min-height: 29px;
+
+    background: #372447;
+    border-radius: 10px;
+    border: none;
+    margin-left: 8px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+
+.list-item__login {
+    min-width: 185px;
+    width: 12%;
+    padding-right: 23px;
+}
+
+.list-item__login-text {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip;
+    word-wrap: break-word;
+}
+
+
+
+.list-item__password {
+    min-width: 132px;
+    width: 8%;
+    padding-right: 35px;
+}
+
+
+.list-item__guard {
+    min-width: 185px;
+    width: 12%;
+}
+
+.list-item__mail {
+    min-width: 230px;
+    width: 14%;
+}
+
+.list-item__mail-pass {
+    min-width: 143px;
+    width: 8%;
+    padding-right: 50px;
+}
+
+.list-item__proxy {
+    min-width: 326px;
+    padding-right: 83px;
+    width: 20%;
+}
+
+.list-item__button {
+    min-width: 90px;
+    padding-right: 8px;
+}
+
+.item-button__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.steam-account-avatar {
+    line-height: 40px;
+    text-align: center;
+    width: 35px;
+    height: 35px;
+    border: 1px solid grey;
+    border-radius: 25px;
+}
+.browser-btn {
+    width: 55px;
+    height: 30px;
+    font-size: 12px;
+    cursor: pointer;
+    line-height: 30px;
+    border-radius: 10px;
+    text-align: center;
+    margin-right: 10px;
+}
+.start-browser-btn {
+    background-color: #2E2E3C;
+    border: 1px solid #379A5E;
+    color: #379A5E;
+}
+.download-browser-btn {
+    background-color: #2E2E3C;
+    border: 1px solid #FFA65E;
+    color: #FFA65E;
+}
+.stop-browser-btn {
+    background-color: #2E2E3C;
+    border: 1px solid #F24E1E;
+    color: #F24E1E;
+}

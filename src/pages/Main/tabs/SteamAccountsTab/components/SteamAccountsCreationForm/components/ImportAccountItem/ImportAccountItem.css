@@ -1,0 +1,70 @@
+.imported-steam-account-item__container {
+  display: flex;
+  flex-direction: column;
+}
+
+.imported-steam-account-item {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  padding-left: 6px;
+  background: #372447;
+  border-radius: 10px;
+  margin-bottom: 5px;
+  min-height: 40px;
+}
+
+
+
+.imported-steam-account_item:last-child {
+  margin-bottom: 0px;
+}
+
+.imported-steam-account-cell {
+  display: flex;
+  justify-content: start;
+  white-space: nowrap;
+  line-height: 50px;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 25%;
+  padding: 0px 5px;
+}
+
+.imported-steam-account-cell-button {
+  line-height: 40px;
+  width: 25%;
+  margin: auto;
+}
+
+.imported-steam-account-button {
+  margin: auto;
+  background: #2f1e38;
+  border-radius: 10px;
+  outline: none;
+  border: none;
+  padding: 5px;
+}
+
+.imported-steam-account-button:hover{
+  background: #4C3560;
+}
+
+.imported-steam-account-avatar-container{
+  width: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.imported-steam-account-avatar {
+  width: 35px;
+  height: 35px;
+  border: 1px solid grey;
+  border-radius: 25px;
+}
+
+
+
+

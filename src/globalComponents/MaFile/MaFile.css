@@ -1,0 +1,33 @@
+.imported-steam-account-mafile-list__container {
+    width: 100%;
+    background: #2c1935;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    padding: 10px;
+    margin-bottom: 5px;
+  }
+
+  .imported-steam-account-mafile-list{
+    height: 100%;
+    list-style-type: none;
+  }
+
+  .maFile-item {
+    margin-bottom: 5px;
+  }
+
+  .maFile-item-data{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .maFile-item-field-value{
+    text-overflow: ellipsis;
+    max-width: 550px;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  

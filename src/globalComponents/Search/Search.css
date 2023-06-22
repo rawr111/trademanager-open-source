@@ -1,0 +1,29 @@
+.search{
+    min-height: 43px;
+    width: 100%;
+    max-width: 500px;
+    background: #372447;
+    border-radius: 10px;
+    padding-left: 20px;
+    padding-right: 15px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.search-input{
+  background: #372447;
+  border: none;
+  width: 100%;
+}
+
+.search-input:focus-visible{
+  outline: none;
+}
+
+.search-img{
+  margin-right: 12px;
+}
+
+

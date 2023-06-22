@@ -1,0 +1,50 @@
+.layout {
+  width: 100%;
+  height: 100%;
+  padding-right: 20px;
+  background-image: url("/assets/gradient.png");
+  background-position: center;
+  border-radius: 30px;
+}
+
+.layout .content {
+  width: 100%;
+  height: calc(100% - 35px);
+  display: flex;
+  justify-content: space-between;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-left: 12px;
+  width: calc(100% - 72px);
+}
+
+.header {
+  min-height: 80px;
+  border-radius: 16px;
+  background-color: #211228a6;
+  width: 100%;
+  margin-bottom: 14px;
+}
+
+.accounts {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  background: #211228a6;
+  border-radius: 16px;
+  margin-bottom: 17px;
+}
+
+@media (min-width: 1200px) {
+  .main {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-left: 12px;
+    width: calc(100% - 228px);
+  }
+}

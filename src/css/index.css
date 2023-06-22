@@ -1,0 +1,147 @@
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.alt-text-container {
+  width: 400px;
+}
+.mini-download {
+  width: 50px;
+  height: 20px;
+}
+.micro-download{
+  margin: auto;
+  width: 20px;
+  height: 20px;
+}
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+html {
+  overflow: hidden;
+}
+
+body {
+  margin: 0;
+  color: #fff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button {
+  cursor: pointer;
+}
+
+.text-grey-small {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  color: #776284;
+}
+
+.text-pink-small{
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  color: #eb00f0;
+}
+
+.text-grey-medium {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 19px;
+  color: #776284;
+}
+.text-grey-large {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 20px;
+  color: #776284;
+}
+
+.text-white-small {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+  color: #ffffff;
+}
+
+.text-white-medium {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 19px;
+  color: #ffffff;
+}
+.text-white-large {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 20px;
+  color: #ffffff;
+}
+
+h1 {
+  font-style: normal;
+  font-weight: 800;
+  font-size: 22px;
+  line-height: 30px;
+  color: #ffffff;
+}
+
+h2 {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 20px;
+}
+
+p {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 20px;
+  color: #ffffff;
+}
+
+.darkBackground {
+  user-select: none;
+  top: 0%;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+div::-webkit-scrollbar {
+  height: 3px;
+  width: 3px;
+}
+
+div::-webkit-scrollbar-track {
+  background: rgba(119, 98, 132, 0.13);
+  border-radius: 16px;
+  transform: matrix(-1, 0, 0, 1, 0, 0);
+}
+
+div::-webkit-scrollbar-thumb {
+  background: linear-gradient(121.85deg, #ff00e5 2.04%, #7000ff 108.41%);
+  border-radius: 16px;
+  transform: matrix(-1, 0, 0, 1, 0, 0);
+}

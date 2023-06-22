@@ -1,0 +1,30 @@
+.steam-accounts-creation-form {
+    overflow-y: auto;
+    height: 100%;
+}
+.info-block {
+    width: 100%;
+    border: 1px solid grey;
+    border-radius: 5px;
+    text-align: left;
+    padding-left: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    line-height: 30px;  
+}
+.steam-data-form .caption {
+    padding-left: 35px;
+    padding-right: 35px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+.proxy-block, .guard-block, .steam-data-block, .import-steam-account-block {
+    padding-left: 35px;
+    padding-right: 35px;
+}
+
+.import-steam-account-block {
+    margin-top: 20px;
+}

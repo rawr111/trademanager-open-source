@@ -1,0 +1,42 @@
+.attic {
+    user-select: none;
+    height: 35px;
+    width: 100vw;
+    display: flex;
+    justify-content: start;
+    padding-right: 20px;
+    padding-left: 20px;
+}
+
+.attic .drag {
+    width: 100%;
+    padding-top: 10px;
+    font-size: 13px;
+}
+
+.attic .buttons {
+    width: 250px;
+}
+
+.attic .buttons div {
+    display: inline-block;
+    width: 40px;
+    height: 30px;
+    float: right;
+}
+
+.attic .drag {
+    -webkit-app-region: drag;
+}
+
+.attic .buttons div:nth-child(1):hover {
+    background-color: red;
+}
+
+.attic .buttons div:nth-child(2):hover {
+    background-color: #372447;
+}
+
+.attic .buttons div:nth-child(3):hover {
+    background-color: #776284;
+}
