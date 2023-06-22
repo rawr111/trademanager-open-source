@@ -1,6 +1,6 @@
 # trademanager-open-source
 
-ГАЙД ПО ИСПОЛЬЗОВАНИЮ ТУТ - https://factual-sail-6ac.notion.site/Trademanager-6dc739f10d11407690b77532b9d068c5
+ГАЙД ПО ИСПОЛЬЗОВАНИЮ ТУТ - https://factual-sail-6ac.notion.site/Trademanager-6dc739f10d11407690b77532b9d068c5<br/>
 Скачать последнюю версию: https://github.com/rawr111/trademanager-open-source
 
 Как собрать проект:
