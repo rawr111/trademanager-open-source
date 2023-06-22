@@ -1,4 +1,4 @@
-import { contextBridge, ipcRenderer, IpcRendererEvent, session, shell } from 'electron';
+import { contextBridge, IpcMainEvent, ipcRenderer, IpcRendererEvent, session, shell } from 'electron';
 import Field from '../interfaces/TableFields/Field';
 import CompiledProxyInterface from '../interfaces/Proxy/CompiledProxyInterface';
 import TableProxyInterface from '../interfaces/Proxy/TableProxyInterface';
@@ -195,19 +195,19 @@ const proxies = {
 }
 
 const window = {
-  openAppdata: ()=>{
+  openAppdata: () => {
     const store = new Store();
     const folderPath = path.dirname(store.path);
 
-    switch(process.platform) {
-        case 'darwin':
-            exec(`open ${folderPath}`);
-            break;
-        case 'win32':
-            exec(`start ${folderPath}`);
-            break;
-        default:
-            exec(`xdg-open ${folderPath}`);
+    switch (process.platform) {
+      case 'darwin':
+        exec(`open ${folderPath}`);
+        break;
+      case 'win32':
+        exec(`start ${folderPath}`);
+        break;
+      default:
+        exec(`xdg-open ${folderPath}`);
     }
   },
   openLink: (link: string = "http://www.google.com") => {
@@ -228,6 +228,13 @@ const window = {
   /** Сделать размер главного окна максимально возможным */
   maximize: () => {
     ipcRenderer.send(WindowsChannels.MAXIMIZE_MAIN_WINDOW);
+  },
+  onGetSecretKey: (listener: (event: IpcRendererEvent) => void) => {
+    ipcRenderer.on(WindowsChannels.GET_SECRET_KEY, listener);
+  },
+  getSecretKey: (key: string) => ipcRenderer.send(WindowsChannels.GET_SECRET_KEY, key),
+  setSecretKey: (key: string) => {
+    ipcRenderer.send(WindowsChannels.SET_SECRET_KEY, key)
   }
 }
 

@@ -16,7 +16,27 @@ const ProxiesPanel = observer(() => {
             }}></div>
             <div className="button-default" id="panel_refresh"></div>
           </div> */}
-
+                    {/* <Button
+                    view="icon"
+                    hoverColor="gradient"
+                    color="grey"
+                    size="large"
+                    img="./assets/img/Shield.png"
+                    hoverImg="./assets/img/ShieldHov.png"
+                    className="button-default"
+                    onClick={() => {
+                        store.windows.prompt({
+                            text: "Введите старый ключ шифрования. Если устанавливаете ключ в первый раз, то оставьте поле пустым",
+                            title: "Установить ключ шифрования",
+                            isInput: true,
+                            type: "question",
+                            cb: (text) => {
+                                window.Main.window.setSecretKey(text);
+                            }
+                        })
+                    }}
+                    altText="Установить код шифрования. Ваши данные будут шифроваться"
+                /> */}
                     <Button
                         view="icon"
                         hoverColor="gradient"

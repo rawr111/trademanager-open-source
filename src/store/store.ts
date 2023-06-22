@@ -17,14 +17,20 @@ export class Store {
         this.tabs = new TabsStore(this);
         makeAutoObservable(this);
 
-        this.windows.prompt({
-            title: "Введите ключ шифрования",
-            text: "Ваши данные зашифрованы с помощью специального ключа. Пожалуйста введите его в поле ниже и программа сможет продолжить работу",
-            type: "question",
-            isInput: true
+        //ЭТА ФУНКЦИЯ ПОКА ЧТО ЗАЛОЧЕНА
+        window.Main.window.onGetSecretKey(() => {
+            this.windows.prompt({
+                title: "Введите ключ шифрования",
+                text: "Ваши данные зашифрованы с помощью специального ключа. Пожалуйста введите его в поле ниже и программа сможет продолжить работу",
+                type: "question",
+                isInput: true,
+                cb: (text) => {
+                    window.Main.window.getSecretKey(text);
+                }
+            });
         });
 
-        window.Main.onError((event, error)=>{
+        window.Main.onError((event, error) => {
             alert(error);
         });
     }

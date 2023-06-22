@@ -1,5 +1,5 @@
 import application from "./components/application/application";
 
-application.start(()=>{
+application.firstStage(()=>{
   console.log('started!');
 });

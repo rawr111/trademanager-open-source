@@ -4,6 +4,7 @@ import listeners from "./listenersRouters/listenersRouters";
 import { app, App, ipcMain } from "electron";
 import Store from "electron-store";
 import WindowsChannels from "../../interfaces/IpcChannels/WindowsChannels";
+import { testCrypto } from "../newStorage/cryptoUserData";
 
 class Application {
   object: App;
@@ -22,25 +23,37 @@ class Application {
     })
   }
 
-  async start(cb: Function) {
+  firstStage(cb: () => void) {
     app.on("ready", async () => {
-      const store = new Store();
-      const secretKey = store.get("secretKey", null);
-
       this.windowsManager.createMain();
-
-      if (secretKey) {
-        this.windowsManager.mainWindow?.webContents.send(WindowsChannels.GET_SECRET_KEY);
-        ipcMain.once(WindowsChannels.GET_SECRET_KEY, (event, key) => {
-          this.secretKey = key;
-          Manager.Load();
-        });
-      }
-
-
-      listeners();
-      cb();
+      //this.decrypt(cb);
+      this.secondStage(cb);
     });
+  }
+
+  decrypt(cb: () => void) {
+    const store = new Store();
+    const secretKey = store.get("secretKey", null);
+
+    if (secretKey) {
+      this.windowsManager.mainWindow?.webContents.send(WindowsChannels.GET_SECRET_KEY);
+      ipcMain.once(WindowsChannels.GET_SECRET_KEY, (event, key) => {
+        if (testCrypto(key)) {
+          this.secretKey = key;
+          this.secondStage(cb);
+        } else {
+          this.decrypt(cb);
+        }
+      });
+    } else {
+      this.secondStage(cb);
+    }
+  }
+
+  secondStage(cb: () => void) {
+    Manager.Load();
+    listeners();
+    cb();
   }
 
   sendToMain(channel: string, content: any) {

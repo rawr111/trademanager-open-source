@@ -5,13 +5,12 @@ import steamAccountManager from "../steamAccountManager";
 
 const steamAccountImport = (smaFile: SmaFileInterface) => {
     try {
-        console.log("start import one")
         const steamAccountParams = SteamAccount.Generate(smaFile, null);
-        console.log(steamAccountParams);
+        console.log('generated');
         const steamAccount = new SteamAccount(steamAccountParams);
+        console.log('new')
         steamAccountManager.addNew(steamAccount);
         SteamAccountStorage.Save(steamAccountParams.id, steamAccountParams);
-        console.log("end import one")
         return steamAccountParams;
     } catch (err){
         throw new Error(`Ошибка в функции импорта стим аккаунта: ${err}`);

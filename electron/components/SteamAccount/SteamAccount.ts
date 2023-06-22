@@ -47,7 +47,11 @@ class SteamAccount {
 
         const cookies = convertSessionToCookies(this.params.maFile.Session);
         
-        this.community.setCookies(cookies);
+        try {
+            this.community.setCookies(cookies);
+        } catch (err){
+            
+        }
     }
 
     setProxy(proxy: ProxyInterface | null) {

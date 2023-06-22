@@ -1,4 +1,4 @@
-import react, { FC } from 'react';
+import react, { FC, useState } from 'react';
 import './prompt.css';
 import store from '../../store/store';
 import { observer } from 'mobx-react';
@@ -6,6 +6,8 @@ import Button from '../Button/Button';
 import Input from '../Input/Input';
 
 const Notification: FC = observer(() => {
+    const [value, setValue] = useState("");
+
     if (!store.windows.isPromptOpen) return <></>;
 
     const cancelButtonText = store.windows.promptContent.cancelButtonText ? store.windows.promptContent.cancelButtonText : "Отмена";
@@ -23,11 +25,12 @@ const Notification: FC = observer(() => {
                     <div className='notification_text'>{store.windows.promptContent.text}</div>
                     <div className='notification__buttons'>
                         {store.windows.promptContent.isInput === true ? <>
-                            <Input value='af' onChange={()=>{
-
+                            <Input value={value} onChange={(value) => {
+                                setValue(value);
                             }} />
                             <Button color='gradient' size='large' isNonGuardButton={false} text={"Подтвердить"} onClick={() => {
-                               
+                                if (store.windows.promptContent.cb)
+                                    store.windows.promptContent.cb(value);
                             }} />
                         </> : <>
                             <Button color='grey' hoverColor='light-grey' size='large' isNonGuardButton={false} text={cancelButtonText} onClick={() => {
@@ -35,7 +38,7 @@ const Notification: FC = observer(() => {
                             }} />
                             <div style={{ width: '20px' }}></div>
                             <Button color='gradient' size='large' isNonGuardButton={false} text={acceptButtonText} onClick={() => {
-                                if (store.windows.promptContent.cb) store.windows.promptContent.cb();
+                                if (store.windows.promptContent.cb) store.windows.promptContent.cb("");
                                 store.windows.closeNotification();
                             }} />
                         </>}

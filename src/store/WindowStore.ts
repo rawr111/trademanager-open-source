@@ -3,7 +3,7 @@ import { makeAutoObservable, toJS, runInAction } from 'mobx';
 
 type ImgType = 'info' | 'error' | 'success' | 'question';
 interface MiniNotificationInterface { text: string, type: ImgType };
-interface PromptInterface extends MiniNotificationInterface { title: string, cb?: Function, acceptButtonText?: string, cancelButtonText?: string, isInput?: boolean };
+interface PromptInterface extends MiniNotificationInterface { title: string, acceptButtonText?: string, cancelButtonText?: string, isInput?: boolean, cb?: (text: string) => void };
 
 class WindowsStore {
     root: Store;
@@ -13,7 +13,7 @@ class WindowsStore {
     isMiniNotificationOpen: boolean;
     miniNotificationContent: MiniNotificationInterface;
     miniNotificationTimeout: NodeJS.Timeout | null;
-    
+
     constructor(root: Store) {
         this.root = root;
 
