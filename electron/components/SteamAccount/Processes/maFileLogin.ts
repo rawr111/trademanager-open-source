@@ -24,7 +24,6 @@ export default async function maFileLogin(steamAccountParams: SteamAccountSetupI
     return new Promise<SmaFileInterface>(async (resolve, reject) => {
         var community = new SteamCommunity();
         if (proxy) {
-            console.log(`http://${proxy.username}:${proxy.password}@${proxy.host}:${proxy.port}`);
             const proxyRequest = request.defaults({ proxy: `http://${proxy.username}:${proxy.password}@${proxy.host}:${proxy.port}` });
             community = new SteamCommunity({ request: proxyRequest });
         }
@@ -126,7 +125,6 @@ export default async function maFileLogin(steamAccountParams: SteamAccountSetupI
             });
         }
 
-        console.log("Check session")
         checkSession(steamAccountParams.maFile.Session.SteamID, steamAccountParams.maFile)
             .then(() => {
                 nextStep("loadData");

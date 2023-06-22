@@ -17,7 +17,6 @@ export class SteamAccountManager {
         this.objects = [...this.objects, steamAccount];
     }
     sendAccountsToFront() {
-        console.log('send accounts to front.');
         const steamAccounts = this.getCompiledObjects();
         application.sendToMain(SteamAccountChannels.STEAM_ACCOUNT_GET, steamAccounts);
     }

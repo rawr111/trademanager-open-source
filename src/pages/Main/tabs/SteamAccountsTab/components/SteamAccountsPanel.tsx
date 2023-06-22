@@ -22,6 +22,19 @@ const ProxiesPanel = observer(() => {
                         hoverColor="gradient"
                         color="grey"
                         size="large"
+                        img="./assets/img/Folder.png"
+                        hoverImg="./assets/img/FolderHov.png"
+                        className="button-default"
+                        onClick={() => {
+                            window.Main.window.openAppdata();
+                        }}
+                        altText="Открыть папку с данными от аккаунтов. Все данные хранятся в файле config.json"
+                    />
+                    <Button
+                        view="icon"
+                        hoverColor="gradient"
+                        color="grey"
+                        size="large"
                         img="./assets/img/SettingsA.svg"
                         hoverImg="./assets/img/SettingsA_hov.svg"
                         className="button-default"

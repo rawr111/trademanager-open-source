@@ -137,7 +137,8 @@ export default async function setupGuard(steamAccountParams: { accountName: stri
                             tmApiKey: steamAccountParams.tmApiKey,
                             maFile: maFile,
                             secondary: secondaries,
-                            familyViewPin: null
+                            familyViewPin: null,
+                            useSteamCookies: true
                         };
                         resolve(sMaFile);
                     })

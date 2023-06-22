@@ -10,11 +10,13 @@ import CreationStepType from '../interfaces/SteamAccount/CreationStepType';
 import ProxySetupInterface from '../interfaces/Proxy/ProxySetupInterface';
 import ChangableSecondaryInterface from '../interfaces/SteamAccount/ChangableSecondaryInterface';
 import SecondaryInterface from '../interfaces/SteamAccount/SecondaryInterface';
+import { exec } from 'child_process';
 import SteamAccountChannels from '../interfaces/IpcChannels/SteamAccountChannels';
 import ProxyChannels from '../interfaces/IpcChannels/ProxyChannels';
 import TableOptions from '../interfaces/TableOptions/TableOptions';
 import WindowsChannels from '../interfaces/IpcChannels/WindowsChannels';
-import AuthChannels from '../interfaces/IpcChannels/AuthChannels';
+import path from "path";
+import Store from "electron-store";
 
 const SteamTotp = require('steam-totp');
 
@@ -193,8 +195,20 @@ const proxies = {
 }
 
 const window = {
-  exit: () => {
-    ipcRenderer.send(AuthChannels.EXIT);
+  openAppdata: ()=>{
+    const store = new Store();
+    const folderPath = path.dirname(store.path);
+
+    switch(process.platform) {
+        case 'darwin':
+            exec(`open ${folderPath}`);
+            break;
+        case 'win32':
+            exec(`start ${folderPath}`);
+            break;
+        default:
+            exec(`xdg-open ${folderPath}`);
+    }
   },
   openLink: (link: string = "http://www.google.com") => {
     shell.openExternal(link);

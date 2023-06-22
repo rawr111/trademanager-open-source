@@ -12,19 +12,28 @@
 
 .notification .notification_content {
     text-align: center;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.notification_content img {
+    width: 50px;
 }
 .notification .notification_content .button_gradient {
     margin: auto;
     width: 135px;
 }
+
 .notification .notification_content .notification_title {
     overflow-y: hidden;
     overflow-x: hidden;
 }
+
 .notification .notification_content .notification_text {
-    height: 110px;
     margin-bottom: 10px;
-    overflow: auto;
 }
 
 .notification .notification_content .notification_text::-webkit-scrollbar {
@@ -32,6 +41,7 @@
     width: 3px;
     background-color: #2D1E36;
 }
+
 .notification .notification_content .notification_text::-webkit-scrollbar-thumb {
     background: linear-gradient(121.85deg, #ff00e5 2.04%, #7000ff 108.41%);
     border-radius: 2px;
@@ -42,7 +52,15 @@
     width: 3px;
     background-color: #2D1E36;
 }
+
 .notification .notification_content .notification_title::-webkit-scrollbar-thumb {
     background: linear-gradient(121.85deg, #ff00e5 2.04%, #7000ff 108.41%);
     border-radius: 2px;
+}
+
+.notification__buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
 }

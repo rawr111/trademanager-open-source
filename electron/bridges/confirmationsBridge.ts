@@ -1,7 +1,7 @@
 import { contextBridge, ipcRenderer, IpcRendererEvent } from 'electron';
 import CConfirmation from 'steamcommunity/classes/CConfirmation';
-import SteamAccountChannels from './interfaces/IpcChannels/SteamAccountChannels';
-import WindowsChannels from './interfaces/IpcChannels/WindowsChannels';
+import SteamAccountChannels from '../interfaces/IpcChannels/SteamAccountChannels';
+import WindowsChannels from '../interfaces/IpcChannels/WindowsChannels';
 
 /** Методы для работы с беком приложения */
 const api = {

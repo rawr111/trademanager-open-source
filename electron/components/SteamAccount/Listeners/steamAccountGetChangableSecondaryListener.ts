@@ -1,6 +1,5 @@
 import steamAccountManager from "../steamAccountManager";
 import SteamAccountChannels from "../../../interfaces/IpcChannels/SteamAccountChannels";
-import Manager from "../../manager/manager";
 
 export default async (event: Electron.IpcMainEvent, id: string) => {
     try {

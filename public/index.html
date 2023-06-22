@@ -15,7 +15,15 @@
 
 <body>
   <div id="root">
-    <h1 style="color: #fff;">ЭТУ СТРАНИЦУ НАДО ЗАВЕРСТАТЬ</h1>
+    <div class="hover"></div>
+    <div class="content">
+      <div class="content__left"></div>
+      <div class="content__right">
+        <div class="content__right-top"></div>
+        <div class="content__right-center"></div>
+        <div class="content__right-bottom"></div>
+      </div>
+    </div>
   </div>
 </body>
 <style>
@@ -24,9 +32,61 @@
     src: url('../assets/fonts/Nunito/Nunito-VariableFont_wght.ttf') format('woff')
   }
 
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
   body {
     font-family: Nunito;
     background-color: #251730;
+  }
+
+  #root {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+
+  .hover {
+    width: 100%;
+    height: 30px;
+
+  }
+  .content {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    height: 100%;
+  }
+  .content__left {
+    width: 230px;
+    border-radius: 0px 20px 0px 0px;
+    background: rgba(33, 18, 40, 0.65);
+  }
+  .content__right {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    gap: 20px;
+  }
+  .content__right-top {
+    border-radius: 16px;
+    background: rgba(33, 18, 40, 0.65);
+    width: 100%;
+    height: 80px;
+  }
+  .content__right-center{
+    border-radius: 16px;
+    background: rgba(33, 18, 40, 0.65);
+    height: 100%;
+  }
+  .content__right-bottom{
+    border-radius: 16px;
+    background: rgba(33, 18, 40, 0.65);
+    height: 68px;
   }
 </style>
 

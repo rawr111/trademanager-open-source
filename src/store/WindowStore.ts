@@ -3,7 +3,7 @@ import { makeAutoObservable, toJS, runInAction } from 'mobx';
 
 type ImgType = 'info' | 'error' | 'success' | 'question';
 interface MiniNotificationInterface { text: string, type: ImgType };
-interface PromptInterface extends MiniNotificationInterface { title: string, cb?: Function, acceptButtonText?: string, cancelButtonText?: string };
+interface PromptInterface extends MiniNotificationInterface { title: string, cb?: Function, acceptButtonText?: string, cancelButtonText?: string, isInput?: boolean };
 
 class WindowsStore {
     root: Store;

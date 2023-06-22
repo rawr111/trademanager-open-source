@@ -10,6 +10,7 @@ export default (session: Session): string[] => {
         ];
         if (session.SteamLogin)
             cookies.push(`steamLogin=${session.SteamLogin}`);
+        console.log(cookies);
         return cookies;
     } catch (err){
         console.log(session);

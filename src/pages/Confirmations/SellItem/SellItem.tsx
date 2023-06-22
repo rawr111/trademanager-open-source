@@ -11,7 +11,7 @@ function SellItem(props: sellItemInterface) {
   return (
     <div className="sell-item-container">
       <div className="sell-item-logo">
-        <img src={item.confirmation.icon}></img>
+        <img src={item.confirmation.icon} style={{ width: "50px" }}></img>
       </div>
       <div className="sell-item-info">
         <div className="sell-item-name text-medium-white">

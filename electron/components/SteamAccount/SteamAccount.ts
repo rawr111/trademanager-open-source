@@ -38,28 +38,26 @@ class SteamAccount {
         this.chrome = new Chrome(params);
         this.params = params;
         this.community = new SteamCommunity();
+
         this.isAskingFamilyPin = false;
         const links = Manager.GetSteamAccountLinkedData(this.params.id);
         if (links.proxy) {
             this.setProxy(links.proxy)
         }
+
+        const cookies = convertSessionToCookies(this.params.maFile.Session);
+        
+        this.community.setCookies(cookies);
     }
 
     setProxy(proxy: ProxyInterface | null) {
         try {
             if (!proxy) {
-                this.community = new SteamCommunity({ request: request });
-                const cookies = convertSessionToCookies(this.params.maFile.Session);
-                this.community.setCookies(cookies);
-                return;
+                return this.community = new SteamCommunity({ request: request });
             }
             const proxyRequest = request.defaults({ proxy: `http://${proxy.username}:${proxy.password}@${proxy.host}:${proxy.port}` });
             this.community = new SteamCommunity({ request: proxyRequest });
-            const cookies = convertSessionToCookies(this.params.maFile.Session);
-            this.community.setCookies(cookies);
         } catch (err) {
-            const cookies = convertSessionToCookies(this.params.maFile.Session);
-
             throw new Error(`Error in setProxy: ${err}`);
         }
     }

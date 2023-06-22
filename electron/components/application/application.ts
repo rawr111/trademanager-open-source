@@ -1,10 +1,14 @@
+import Manager from "../manager/manager";
 import WindowsManager from "./WindowsManager/WindowsManager";
 import listeners from "./listenersRouters/listenersRouters";
-import { app, App } from "electron";
+import { app, App, ipcMain } from "electron";
+import Store from "electron-store";
+import WindowsChannels from "../../interfaces/IpcChannels/WindowsChannels";
 
 class Application {
   object: App;
   windowsManager: WindowsManager;
+  secretKey: string | null;
 
   constructor() {
     this.object = app;
@@ -20,7 +24,20 @@ class Application {
 
   async start(cb: Function) {
     app.on("ready", async () => {
+      const store = new Store();
+      const secretKey = store.get("secretKey", null);
+
       this.windowsManager.createMain();
+
+      if (secretKey) {
+        this.windowsManager.mainWindow?.webContents.send(WindowsChannels.GET_SECRET_KEY);
+        ipcMain.once(WindowsChannels.GET_SECRET_KEY, (event, key) => {
+          this.secretKey = key;
+          Manager.Load();
+        });
+      }
+
+
       listeners();
       cb();
     });

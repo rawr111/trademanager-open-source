@@ -1,5 +1,5 @@
 import { contextBridge, ipcRenderer, IpcRendererEvent, shell } from 'electron';
-import WindowsChannels from './interfaces/IpcChannels/WindowsChannels';
+import WindowsChannels from '../interfaces/IpcChannels/WindowsChannels';
 
 const errorApi = {
     openLink: () => {
