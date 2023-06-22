@@ -101,7 +101,7 @@ const Navigation = observer(() => {
             )}
           </div>
 
-          <div
+          {/* <div
             className={buttonsClass}
             onClick={() => {
               store.tabs.setActive("extensions");
@@ -134,7 +134,7 @@ const Navigation = observer(() => {
                 Расширения
               </div>
             )}
-          </div>
+          </div> */}
 
           <div
             className={buttonsClass}
@@ -171,25 +171,6 @@ const Navigation = observer(() => {
             )}
           </div>
         </div>
-      </div>
-      <div
-        onClick={() => {
-          store.windows.openMyProfile();
-        }}
-        className={
-          isCompress
-            ? "navigation-button_mini"
-            : "navigation-button navigation-button_account"
-        }
-      >
-        <img src="./assets/img/Account.svg"></img>
-        {isCompress ? (
-          ""
-        ) : (
-          <div className="button__text_navigation text-white-large">
-            Мой профиль
-          </div>
-        )}
       </div>
     </div>
   );

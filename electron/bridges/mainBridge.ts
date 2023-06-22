@@ -16,6 +16,8 @@ import TableOptions from '../interfaces/TableOptions/TableOptions';
 import WindowsChannels from '../interfaces/IpcChannels/WindowsChannels';
 import AuthChannels from '../interfaces/IpcChannels/AuthChannels';
 
+const SteamTotp = require('steam-totp');
+
 const setRequestHeaders = () => {
   console.log(session);
   if (!session) return;
@@ -41,10 +43,10 @@ const steamAccounts = {
   startBrowser(id: string) {
     ipcRenderer.send(SteamAccountChannels.START_BROWSER, id);
   },
-  stopBrowser(id: string){
+  stopBrowser(id: string) {
     ipcRenderer.send(SteamAccountChannels.STOP_BROWSER, id);
   },
-  focusBrowser(id: string){
+  focusBrowser(id: string) {
     console.log(id);
     ipcRenderer.send(SteamAccountChannels.FOCUS_BROWSER, id);
   },
@@ -230,6 +232,10 @@ const guardConnection = {
   },
   abortSetup: () => {
     ipcRenderer.send('ABORT_SETUP_GUARD');
+  },
+  getAuthCode: (shared_secret: string) => {
+    return SteamTotp.getAuthCode(shared_secret);
+    //ipcRenderer.send(SteamAccountChannels.STEAM_ACCOUNT_AUTH_CODE, { id, shared_secret });
   }
 }
 

@@ -1,10 +1,8 @@
 .table-footer-left {
     display: flex;
+    gap: 10px;
 }
 
-.table-footer-left_item {
-    margin-right: 10px;
-}
 
 .page-switcher-img {
     width: 15px;

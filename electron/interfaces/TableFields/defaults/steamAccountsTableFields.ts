@@ -10,67 +10,11 @@ const steamAccountsTableFields: Field[] = [
         showTtitleInTable: true
     },
     {
-        type: AvalibleFieldTypes.tmApiKey,
-        title: "TM api",
-        isSortable: true,
-        isVisible: true,
-        showTtitleInTable: true
-    },
-    {
-        type: AvalibleFieldTypes.mail,
-        title: "Почта",
-        isSortable: true,
-        isVisible: true,
-        showTtitleInTable: true
-    },
-    {
-        type: AvalibleFieldTypes.mailPassword,
-        title: "Почта (пароль)",
-        isSortable: false,
-        isVisible: true,
-        showTtitleInTable: true
-    },
-    {
         type: AvalibleFieldTypes.startButton,
         title: "Кнопка запуска браузера",
         isSortable: false,
         isVisible: true,
         showTtitleInTable: false
-    },
-    {
-        type: AvalibleFieldTypes.steamAccountNickname,
-        title: "Ник Steam",
-        isSortable: true,
-        isVisible: true,
-        showTtitleInTable: true
-    },
-    {
-        type: AvalibleFieldTypes.csgoTmBalance,
-        title: "Баланс CSGO TM",
-        isSortable: true,
-        isVisible: true,
-        showTtitleInTable: true
-    },
-    {
-        type: AvalibleFieldTypes.ktState,
-        title: "Статус КТ",
-        isSortable: true,
-        isVisible: true,
-        showTtitleInTable: true
-    },
-    {
-        type: AvalibleFieldTypes.tpState,
-        title: "Статус ТП",
-        isSortable: true,
-        isVisible: true,
-        showTtitleInTable: true
-    },
-    {
-        type: AvalibleFieldTypes.tradeState,
-        title: "Статус обменов",
-        isSortable: true,
-        isVisible: true,
-        showTtitleInTable: true
     },
     {
         type: AvalibleFieldTypes.steamAccountAvatar,
@@ -119,6 +63,65 @@ const steamAccountsTableFields: Field[] = [
         title: "Пароль Steam",
         isSortable: true,
         isVisible: true,
+        showTtitleInTable: true
+    },
+
+    {
+        type: AvalibleFieldTypes.csgoTmBalance,
+        title: "Баланс CSGO TM",
+        isSortable: true,
+        isVisible: false,
+        showTtitleInTable: true
+    },
+
+    {
+        type: AvalibleFieldTypes.ktState,
+        title: "Статус КТ",
+        isSortable: true,
+        isVisible: true,
+        showTtitleInTable: true
+    },
+    {
+        type: AvalibleFieldTypes.tpState,
+        title: "Статус ТП",
+        isSortable: true,
+        isVisible: true,
+        showTtitleInTable: true
+    },
+    {
+        type: AvalibleFieldTypes.tradeState,
+        title: "Статус обменов",
+        isSortable: true,
+        isVisible: true,
+        showTtitleInTable: true
+    },
+
+    {
+        type: AvalibleFieldTypes.steamAccountNickname,
+        title: "Ник Steam",
+        isSortable: true,
+        isVisible: false,
+        showTtitleInTable: true
+    },
+    {
+        type: AvalibleFieldTypes.tmApiKey,
+        title: "TM api",
+        isSortable: true,
+        isVisible: false,
+        showTtitleInTable: true
+    },
+    {
+        type: AvalibleFieldTypes.mail,
+        title: "Почта",
+        isSortable: true,
+        isVisible: false,
+        showTtitleInTable: true
+    },
+    {
+        type: AvalibleFieldTypes.mailPassword,
+        title: "Почта (пароль)",
+        isSortable: false,
+        isVisible: false,
         showTtitleInTable: true
     },
     {

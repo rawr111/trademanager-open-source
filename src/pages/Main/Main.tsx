@@ -10,7 +10,6 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import store from "../../store/store";
 import { observer } from "mobx-react";
-import MyProfile from "./components/MyProfile/MyProfile";
 import SupportTab from "./tabs/SupportTab/SupportTab";
 import ExtensionTab from "./tabs/ExtensionsTab/ExtensionsTab";
 
@@ -26,8 +25,6 @@ const Main = observer(() => {
           {store.tabs.active === "extensions" ? <ExtensionTab /> : <></>}
           {store.tabs.active === "support" ? <SupportTab /> : <></>}
         </div>
-
-        <MyProfile />
         <Prompt />
         <MiniNotification />
       </DndProvider>

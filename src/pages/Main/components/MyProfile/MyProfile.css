@@ -1,9 +1,0 @@
-.myProfile-container {
-    padding: 20px;
-    line-height: 25px;
-}
-.myProfile-container div {
-    padding-top: 50px;
-    display: flex;
-    justify-content: space-between;
-}

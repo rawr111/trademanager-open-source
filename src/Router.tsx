@@ -3,7 +3,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Main from "./pages/Main/Main";
 import AskFamilyPin from "./pages/AskSomething/AskSomething";
 import Confirmations from "./pages/Confirmations/Confirmations";
-import Auth from './pages/Auth/Auth';
 import { observer } from 'mobx-react';
 import Error from './pages/Error/Error';
 
@@ -17,11 +16,7 @@ const Router: FC = observer(() => {
             return <AskFamilyPin />;
         case "main":
             return <Main />;
-        case "auth":
-            root!.style.borderRadius = '20px';
-            return <Auth />;
         case "error":
-
             root!.style.borderRadius = '20px';
             return <Error />
         default:
