@@ -100,7 +100,7 @@ export default async function setupGuard(
                     try {
                       await session.submitSteamGuardCode(code);
                     } catch (error) {
-                      if (error.eresult === EResult.TwoFactorCodeMismatch) {
+                      if (error.message === "InvalidLoginAuthCode") {
                         await promtEmailCode();
                       } else {
                         throw error;
@@ -150,6 +150,7 @@ export default async function setupGuard(
               }
               //@ts-ignore
               const rawMaFile: TwoFactorResponseInterface = response;
+              console.log(rawMaFile);
               const promtSmsCode = async (
                 rawMaFile: TwoFactorResponseInterface
               ) => {
@@ -174,8 +175,9 @@ export default async function setupGuard(
                 } catch (error) {
                   if (error.message == "Invalid activation code") {
                     await promtSmsCode(rawMaFile);
+                  } else {
+                    return reject(error);
                   }
-                  return reject(error);
                 }
               };
               await promtSmsCode(rawMaFile);
@@ -185,6 +187,8 @@ export default async function setupGuard(
                 device_id: SteamTotp.getDeviceID(session.steamID),
                 fully_enrolled: true,
               };
+              maFile.Session.SteamID = session.steamID.toString();
+              console.log(maFile);
               resolve(maFile);
             });
           });
@@ -206,6 +210,7 @@ export default async function setupGuard(
               familyViewPin: null,
               useSteamCookies: true,
             };
+            console.log(sMaFile);
             resolve(sMaFile);
           })
           .catch((err) => {
