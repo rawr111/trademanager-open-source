@@ -157,14 +157,6 @@
                   "preload": {
                     "js": "./electron/bridges/errorWindowBridge.ts"
                   }
-                },
-                {
-                  "html": "./public/index.html",
-                  "js": "./src/index.tsx",
-                  "name": "auth_window",
-                  "preload": {
-                    "js": "./electron/bridges/authBridge.ts"
-                  }
                 }
               ]
             }
