@@ -37,29 +37,35 @@ export default async function maFileLogin(steamAccountParams: SteamAccountSetupI
         const checkSession = (accountId: string, maFile: MaFileInterface): Promise<void> => {
             return new Promise<void>((resolve, reject) => {
                 nextStep("checkLoginStatus");
-                if (maFile.Session?.SteamLoginSecure &&
+                if (
+                    maFile.Session &&
+                    maFile.Session?.SteamLoginSecure &&
                     maFile.Session.SessionID &&
                     maFile.Session.WebCookie &&
                     maFile.Session.SteamID
                 ) {
-                    const cookies = convertSessionToCookies(maFile.Session);
-                    console.log('revert: ');
-                    console.log(cookies);
-                    community.setCookies(cookies);
-                    community.loggedIn(async (err, loggedIn, familyView) => {
-                        console.log('logged in:');
-                        console.log(err, loggedIn, familyView);
-                        if (err) return reject(err);
-                        if (!loggedIn) return reject(new Error("Not logged in"));
-                        if (familyView) {
-                            await familyViewPinLoop(accountId, maFile.account_name)
-                                .catch((err) => {
-                                    return reject(err);
-                                })
-                        }
-                        console.log(err, loggedIn, familyView);
-                        resolve();
-                    });
+                    try {
+                        const cookies = convertSessionToCookies(maFile.Session);
+                        console.log('revert: ');
+                        console.log(cookies);
+                        community.setCookies(cookies);
+                        community.loggedIn(async (err, loggedIn, familyView) => {
+                            console.log('logged in:');
+                            console.log(err, loggedIn, familyView);
+                            if (err) return reject(err);
+                            if (!loggedIn) return reject(new Error("Not logged in"));
+                            if (familyView) {
+                                await familyViewPinLoop(accountId, maFile.account_name)
+                                    .catch((err) => {
+                                        return reject(err);
+                                    })
+                            }
+                            console.log(err, loggedIn, familyView);
+                            resolve();
+                        });
+                    } catch (err) {
+                        reject(err);
+                    }
                 } else {
                     reject(new Error("Invalid session"));
                 }
@@ -69,6 +75,7 @@ export default async function maFileLogin(steamAccountParams: SteamAccountSetupI
         const createSession = (accountName: string, password: string, shared_secret: string): Promise<SessionInterface> => {
             return new Promise<SessionInterface>((resolve, reject) => {
                 nextStep("loginByPassword");
+
                 community.login({
                     accountName: accountName,
                     password: password,
@@ -77,13 +84,11 @@ export default async function maFileLogin(steamAccountParams: SteamAccountSetupI
                 }, async (err, _sessionID, _cookies, _steamguard, oAuthToken) => {
                     if (err) {
                         if (err.message == "SteamGuardMobile") {
-                            await SuperMethods.Sleep(7000);
-                            resolve(await createSession(accountName, password, shared_secret));
+                            reject(err);
                         }
 
                         return reject(err);
                     }
-                    console.log(_cookies);
                     const session: SessionInterface = convertCookiesToSession(_cookies);
                     resolve(session);
                 });
@@ -125,47 +130,71 @@ export default async function maFileLogin(steamAccountParams: SteamAccountSetupI
             });
         }
 
-        checkSession(steamAccountParams.maFile.Session.SteamID, steamAccountParams.maFile)
-            .then(() => {
-                nextStep("loadData");
-                getSecondaries(community)
-                    .then(data => {
-                        const sMaFile: SmaFileInterface = {
-                            accountName: steamAccountParams.accountName,
-                            password: steamAccountParams.password,
-                            maFile: steamAccountParams.maFile,
-                            secondary: data,
-                            tmApiKey: steamAccountParams.tmApiKey ? steamAccountParams.tmApiKey : undefined,
-                            familyViewPin: steamAccountParams.familyViewPin ? steamAccountParams.familyViewPin : null,
-                            useSteamCookies: steamAccountParams.useSteamCookies
-                        };
-                        resolve(sMaFile);
+        try {
+            if (!steamAccountParams.maFile.Session) {
+                console.log("Create session")
+                createSession(steamAccountParams.accountName, steamAccountParams.password, steamAccountParams.maFile.shared_secret)
+                    .then(session => {
+                        steamAccountParams.maFile.Session = session;
+                        console.log(session);
+                        maFileLogin(steamAccountParams, options)
+                            .then(smaFile => {
+                                resolve(smaFile);
+                            })
+                            .catch((err) => {
+                                reject(err);
+                            });
                     })
                     .catch(err => {
                         reject(err);
                     });
-            })
-            .catch(async (err) => {
-                if (err.message == "Invalid session" || err.message == "Not logged in") {
-                    console.log("Create session")
-                    createSession(steamAccountParams.accountName, steamAccountParams.password, steamAccountParams.maFile.shared_secret)
-                        .then(session => {
-                            steamAccountParams.maFile.Session = session;
-                            console.log(session);
-                            maFileLogin(steamAccountParams, options)
-                                .then(smaFile => {
-                                    resolve(smaFile);
+            } else {
+                checkSession(steamAccountParams.maFile.Session.SteamID, steamAccountParams.maFile)
+                    .then(() => {
+                        nextStep("loadData");
+                        getSecondaries(community)
+                            .then(data => {
+                                const sMaFile: SmaFileInterface = {
+                                    accountName: steamAccountParams.accountName,
+                                    password: steamAccountParams.password,
+                                    maFile: steamAccountParams.maFile,
+                                    secondary: data,
+                                    tmApiKey: steamAccountParams.tmApiKey ? steamAccountParams.tmApiKey : undefined,
+                                    familyViewPin: steamAccountParams.familyViewPin ? steamAccountParams.familyViewPin : null,
+                                    useSteamCookies: steamAccountParams.useSteamCookies
+                                };
+                                resolve(sMaFile);
+                            })
+                            .catch(err => {
+                                reject(err);
+                            });
+                    })
+                    .catch(async (err) => {
+                        if (err.message == "Invalid session" || err.message == "Not logged in") {
+                            console.log("Create session")
+                            createSession(steamAccountParams.accountName, steamAccountParams.password, steamAccountParams.maFile.shared_secret)
+                                .then(session => {
+                                    steamAccountParams.maFile.Session = session;
+                                    console.log(session);
+                                    maFileLogin(steamAccountParams, options)
+                                        .then(smaFile => {
+                                            resolve(smaFile);
+                                        })
+                                        .catch((err) => {
+                                            reject(err);
+                                        });
                                 })
-                                .catch((err) => {
+                                .catch(err => {
                                     reject(err);
                                 });
-                        })
-                        .catch(err => {
+                        } else {
                             reject(err);
-                        });
-                } else {
-                    reject(err);
-                }
-            });
+                        }
+                    });
+            }
+        } catch (err) {
+            reject(err);
+        }
+
     });
 }

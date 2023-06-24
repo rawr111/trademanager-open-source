@@ -55,12 +55,14 @@ const MaFileImport: FC<{ currentMaFile: MaFileInterface | null, onChange: (newMa
                     if (files) {
                         readFile(files[0])
                             .then((maFile: MaFileInterface) => {
-                                if (!maFile.Session) throw new Error(`В мафайле отсутствуют данные о сессии!`);
-
-                                const steamid: any = maFile.Session.SteamID;
-                                if (typeof (steamid) != 'string') {
-                                    maFile.Session.SteamID = String(steamid.c[0]) + String(steamid.c[1]);
+                                if (maFile.Session) {
+                                    const steamid: any = maFile.Session.SteamID;
+                                    if (typeof (steamid) != 'string') {
+                                        maFile.Session.SteamID = String(steamid.c[0]) + String(steamid.c[1]);
+                                    }
                                 }
+
+
                                 onChange(maFile);
                             })
                             .catch((err) => {
