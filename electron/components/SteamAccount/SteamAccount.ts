@@ -28,12 +28,17 @@ class SteamAccount {
     chrome: Chrome;
 
     constructor(params: SteamAccountInterface) {
+        if (!params.autoConfirmTrades) {
+            params.autoConfirmTrades = false
+        }
+
         this.setupParams = {
             accountName: params.accountName,
             password: params.password,
             maFile: params.maFile,
             familyViewPin: params.familyViewPin,
-            useSteamCookies: params.useSteamCookies
+            useSteamCookies: params.useSteamCookies,
+            autoConfirmTrades: params.autoConfirmTrades
         };
         this.chrome = new Chrome(params);
         this.params = params;
@@ -56,11 +61,17 @@ class SteamAccount {
 
     setProxy(proxy: ProxyInterface | null) {
         try {
-            if (!proxy) {
-                return this.community = new SteamCommunity({ request: request });
-            }
-            const proxyRequest = request.defaults({ proxy: `http://${proxy.username}:${proxy.password}@${proxy.host}:${proxy.port}` });
-            this.community = new SteamCommunity({ request: proxyRequest });
+          if (!proxy) {
+            return (this.community = new SteamCommunity({
+              // @ts-ignore
+              request: request,
+            }));
+          }
+          const proxyRequest = request.defaults({
+            proxy: `http://${proxy.username}:${proxy.password}@${proxy.host}:${proxy.port}`,
+          });
+          // @ts-ignore
+          this.community = new SteamCommunity({ request: proxyRequest });
         } catch (err) {
             throw new Error(`Error in setProxy: ${err}`);
         }
@@ -180,7 +191,8 @@ class SteamAccount {
             password: this.params.password,
             maFile: this.params.maFile,
             familyViewPin: this.params.familyViewPin,
-            useSteamCookies: this.params.useSteamCookies
+            useSteamCookies: this.params.useSteamCookies,
+            autoConfirmTrades: this.params.autoConfirmTrades
         }
         return smaFile;
     }
