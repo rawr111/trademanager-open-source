@@ -235,6 +235,10 @@ const window = {
   getSecretKey: (key: string) => ipcRenderer.send(WindowsChannels.GET_SECRET_KEY, key),
   setSecretKey: (key: string) => {
     ipcRenderer.send(WindowsChannels.SET_SECRET_KEY, key)
+  },
+  getMaximizeMainWindowStatus: () => ipcRenderer.send(WindowsChannels.GET_MAXIMIZE_STATUS_MAIN_WINDOW),
+  onMaximizeMainWindowStatus: (listener: (event: IpcRendererEvent, isMaximized: boolean) => void) => {
+    ipcRenderer.on(WindowsChannels.GET_MAXIMIZE_STATUS_MAIN_WINDOW, listener);
   }
 }
 

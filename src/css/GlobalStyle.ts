@@ -3,7 +3,7 @@ import { createGlobalStyle } from 'styled-components';
 
 //здесь только подключение картинок и ховеров с картинками
 
-export const GlobalStyle = createGlobalStyle`
+`
   .table_bottom_icon{
     background-image: url(./assets/img/MiniTriangle.svg);
     background-size: 10px;

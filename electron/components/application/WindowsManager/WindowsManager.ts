@@ -45,7 +45,7 @@ class WindowsManager {
         });
         this.errorWindows[winId].webContents.on('dom-ready', () => {
             setTimeout(async () => {
-                this.errorWindows[winId].webContents.send(WindowChannels.GET_ERROR_WINDOW_PARAMS, { id: winId, title, text  });
+                this.errorWindows[winId].webContents.send(WindowChannels.GET_ERROR_WINDOW_PARAMS, { id: winId, title, text });
             }, 50);
         });
         this.errorWindows[winId].focus();
@@ -74,6 +74,12 @@ class WindowsManager {
             }
         });
         this.mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
+
+        this.mainWindow.on("resize", (event: IpcMainEvent) => {
+            if (!this.mainWindow) return;
+            const isMaximized = this.mainWindow.isMaximized();
+            this.mainWindow.webContents.send(WindowChannels.GET_MAXIMIZE_STATUS_MAIN_WINDOW, isMaximized);
+        });
     }
     createConfirmationsWindow(id: string, steamAccountName: string) {
         return new Promise((resolve) => {

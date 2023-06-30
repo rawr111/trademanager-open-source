@@ -13,10 +13,12 @@ class WindowsStore {
     isMiniNotificationOpen: boolean;
     miniNotificationContent: MiniNotificationInterface;
     miniNotificationTimeout: NodeJS.Timeout | null;
+    isMainWindowMaximized: boolean;
 
     constructor(root: Store) {
         this.root = root;
 
+        this.isMainWindowMaximized = true;
         this.isMyProfileOpen = false;
         this.isPromptOpen = false;
         this.promptContent = {} as PromptInterface;
@@ -26,6 +28,14 @@ class WindowsStore {
             type: 'error'
         };
         this.miniNotificationTimeout = null;
+
+        window.Main.window.getMaximizeMainWindowStatus();
+
+        window.Main.window.onMaximizeMainWindowStatus((event, isMaximized) => {
+            runInAction(() => {
+                this.isMainWindowMaximized = isMaximized;
+            });
+        });
 
         makeAutoObservable(this);
     }

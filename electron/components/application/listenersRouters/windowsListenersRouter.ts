@@ -23,6 +23,7 @@ import maximizeErrorWindowListener from '../WindowsManager/windowsListeners/maxi
 import minimizeErrorWindowListener from '../WindowsManager/windowsListeners/minimizeErrorWindowListener';
 import getProfileParams from '../WindowsManager/windowsListeners/getProfileParams';
 import setSecretKeyListener from '../WindowsManager/windowsListeners/setSecretKeyListener';
+import getMainWindowMaximizeStatus from '../WindowsManager/windowsListeners/getMainWindowMaximizeStatus';
 
 export default () => {
     //main window
@@ -31,6 +32,7 @@ export default () => {
     ipcMain.on(WindowsChannels.CENTERIZE_MAIN_WINDOW, centerizeMainWindowListener);
     ipcMain.on(WindowsChannels.MAXIMIZE_MAIN_WINDOW, maximizeMainWindowListener);
     ipcMain.on(WindowsChannels.MINIMIZE_MAIN_WINDOW, minimizeMainWindowListener);
+    ipcMain.on(WindowsChannels.GET_MAXIMIZE_STATUS_MAIN_WINDOW, getMainWindowMaximizeStatus);
 
     //ask window
     ipcMain.on(WindowsChannels.CLOSE_ASK_WINDOW, closeAskWindowListener);

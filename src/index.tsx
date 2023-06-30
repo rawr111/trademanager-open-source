@@ -9,12 +9,7 @@ import './css/CircleAnimation.css';
 //import { GlobalStyle } from './css/GlobalStyle';
 //import App from './components/App';
 import Router from './Router';
-import { GlobalStyle } from './css/GlobalStyle';
-
 ReactDOM.render(
-  <>
-    <GlobalStyle />
-    <Router />
-  </>,
+  <Router />,
   document.getElementById("root")
 );
