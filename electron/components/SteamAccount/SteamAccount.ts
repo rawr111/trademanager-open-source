@@ -58,11 +58,18 @@ class SteamAccount {
 
       const cookies = convertSessionToCookies(this.params.maFile.Session);
 
-        try {
-            this.community.setCookies(cookies);
-        } catch (err){
-            
+      try {
+        this.community.setCookies(cookies);
+        if (this.params.autoConfirm) {
+          console.log("startConfirmationChecker");
+          this.community.startConfirmationChecker(
+            this.params.pollInterval,
+            this.params.maFile.identity_secret
+          );
         }
+      } catch (err) {
+        console.error(err);
+      }
     }
 
     setProxy(proxy: ProxyInterface | null) {
@@ -198,7 +205,7 @@ class SteamAccount {
             maFile: this.params.maFile,
             familyViewPin: this.params.familyViewPin,
             useSteamCookies: this.params.useSteamCookies,
-            autoConfirmTrades: this.params.autoConfirmTrades,
+            autoConfirm: this.params.autoConfirm,
             pollInterval: this.params.pollInterval
         }
         return smaFile;
@@ -248,6 +255,10 @@ class SteamAccount {
             }
         }
         SteamAccountStorage.EditData(this.params.id, newParams);
+    }
+    stopAutoConfirmaion() {
+      this.community.stopConfirmationChecker();
+      this.params.autoConfirm = false;
     }
     static Generate(smaFile: SmaFile, changableSecondary: ChangableSecondaryInterface | null) {
         const steamAccounts = steamAccountManager.objects;
