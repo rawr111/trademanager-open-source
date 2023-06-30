@@ -1,4 +1,3 @@
-import RequestPromise from "../Request/Request";
 import SteamAccountInterface from "../../interfaces/SteamAccount/SteamAccountInterface";
 import SteamAccountSetupInterface from "../../interfaces/SteamAccount/SteamAccountSetupInterface";
 import SteamAccountStorage from "../newStorage/SteamAccountStorage";
@@ -28,8 +27,14 @@ class SteamAccount {
     chrome: Chrome;
 
     constructor(params: SteamAccountInterface) {
+        /** 
+         * Защита для старых аккаунтов, у которых не установлен это параметр
+         */
         if (!params.autoConfirmTrades) {
             params.autoConfirmTrades = false
+        }
+        if (!params.pollInterval) {
+            params.pollInterval = 5000
         }
 
         this.setupParams = {
@@ -38,7 +43,8 @@ class SteamAccount {
             maFile: params.maFile,
             familyViewPin: params.familyViewPin,
             useSteamCookies: params.useSteamCookies,
-            autoConfirmTrades: params.autoConfirmTrades
+            autoConfirmTrades: params.autoConfirmTrades,
+            pollInterval: params.pollInterval
         };
         this.chrome = new Chrome(params);
         this.params = params;
@@ -192,7 +198,8 @@ class SteamAccount {
             maFile: this.params.maFile,
             familyViewPin: this.params.familyViewPin,
             useSteamCookies: this.params.useSteamCookies,
-            autoConfirmTrades: this.params.autoConfirmTrades
+            autoConfirmTrades: this.params.autoConfirmTrades,
+            pollInterval: this.params.pollInterval
         }
         return smaFile;
     }
