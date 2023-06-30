@@ -10,6 +10,6 @@ export default interface SteamAccountSetupInterface {
   mail?: string;
   mailPassword?: string;
   useSteamCookies: boolean;
-  autoConfirmTrades: boolean;
+  autoConfirm: boolean;
   pollInterval: number;
 }

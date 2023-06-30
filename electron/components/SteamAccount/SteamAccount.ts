@@ -27,37 +27,37 @@ class SteamAccount {
     chrome: Chrome;
 
     constructor(params: SteamAccountInterface) {
-        /** 
-         * Защита для старых аккаунтов, у которых не установлен это параметр
-         */
-        if (!params.autoConfirmTrades) {
-            params.autoConfirmTrades = false
-        }
-        if (!params.pollInterval) {
-            params.pollInterval = 5000
-        }
+      /**
+       * Защита для старых аккаунтов, у которых не установлен это параметр
+       */
+      if (!params.autoConfirm) {
+        params.autoConfirm = false;
+      }
+      if (!params.pollInterval) {
+        params.pollInterval = 5000;
+      }
 
-        this.setupParams = {
-            accountName: params.accountName,
-            password: params.password,
-            maFile: params.maFile,
-            familyViewPin: params.familyViewPin,
-            useSteamCookies: params.useSteamCookies,
-            autoConfirmTrades: params.autoConfirmTrades,
-            pollInterval: params.pollInterval
-        };
-        this.chrome = new Chrome(params);
-        this.params = params;
-        this.community = new SteamCommunity();
+      this.setupParams = {
+        accountName: params.accountName,
+        password: params.password,
+        maFile: params.maFile,
+        familyViewPin: params.familyViewPin,
+        useSteamCookies: params.useSteamCookies,
+        autoConfirm: params.autoConfirm,
+        pollInterval: params.pollInterval,
+      };
+      this.chrome = new Chrome(params);
+      this.params = params;
+      this.community = new SteamCommunity();
 
-        this.isAskingFamilyPin = false;
-        const links = Manager.GetSteamAccountLinkedData(this.params.id);
-        if (links.proxy) {
-            this.setProxy(links.proxy)
-        }
+      this.isAskingFamilyPin = false;
+      const links = Manager.GetSteamAccountLinkedData(this.params.id);
+      if (links.proxy) {
+        this.setProxy(links.proxy);
+      }
 
-        const cookies = convertSessionToCookies(this.params.maFile.Session);
-        
+      const cookies = convertSessionToCookies(this.params.maFile.Session);
+
         try {
             this.community.setCookies(cookies);
         } catch (err){
