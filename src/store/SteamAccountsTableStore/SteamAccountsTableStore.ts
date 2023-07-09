@@ -96,7 +96,48 @@ class SteamAccountsTableStore {
       //this.writeChangableSecondariesError(data.id, String(data.err));
     });
     window.Main.steamAccounts.onGetTableFields((event, fields) => {
-      this.setFields(fields);
+      console.log(fields);
+      runInAction(() => {
+        this.fields = [
+          {
+            type: AvalibleTypes.checkbox,
+            isSortable: false,
+            isVisible: true,
+            title: "",
+            showTtitleInTable: false,
+          },
+          ...fields,
+          {
+            type: AvalibleTypes.refreshButton,
+            isSortable: false,
+            isVisible: true,
+            title: "",
+            showTtitleInTable: false,
+          },
+          {
+            type: AvalibleTypes.exportButton,
+            isSortable: false,
+            isVisible: true,
+            title: "",
+            showTtitleInTable: false,
+          },
+          {
+            type: AvalibleTypes.editingButton,
+            isSortable: false,
+            isVisible: true,
+            title: "",
+            showTtitleInTable: false,
+          },
+          {
+            type: AvalibleTypes.deleteButton,
+            isSortable: false,
+            isVisible: true,
+            title: "",
+            showTtitleInTable: false,
+          },
+        ]
+      });
+      console.log(this.fields);
     });
     window.Main.steamAccounts.onRefreshSession((event, id) => {
       console.log(`steam account #${id} session has been refreshed`);
@@ -111,9 +152,8 @@ class SteamAccountsTableStore {
         this.steamAccounts[data.id].isLogining = false;
       });
       this.root.windows.openMiniNotification({
-        text: `Не удалось обновить сессию аккаунта #${
-          this.steamAccounts[data.id].number
-        }: ${data.err}`,
+        text: `Не удалось обновить сессию аккаунта #${this.steamAccounts[data.id].number
+          }: ${data.err}`,
         type: "error",
       });
     });
@@ -265,44 +305,9 @@ class SteamAccountsTableStore {
     return toJS(this.fields);
   }
   getFields() {
-    return toJS([
-      {
-        type: AvalibleTypes.checkbox,
-        isSortable: false,
-        isVisible: true,
-        title: "",
-        showTtitleInTable: false,
-      },
-      ...this.fields,
-      {
-        type: AvalibleTypes.refreshButton,
-        isSortable: false,
-        isVisible: true,
-        title: "",
-        showTtitleInTable: false,
-      },
-      {
-        type: AvalibleTypes.exportButton,
-        isSortable: false,
-        isVisible: true,
-        title: "",
-        showTtitleInTable: false,
-      },
-      {
-        type: AvalibleTypes.editingButton,
-        isSortable: false,
-        isVisible: true,
-        title: "",
-        showTtitleInTable: false,
-      },
-      {
-        type: AvalibleTypes.deleteButton,
-        isSortable: false,
-        isVisible: true,
-        title: "",
-        showTtitleInTable: false,
-      },
-    ]);
+    console.log('get');
+    console.log(toJS(this.fields));
+    return toJS(this.fields);
   }
   getSteamAccounts() {
     return toJS(this.steamAccounts);
@@ -322,7 +327,7 @@ class SteamAccountsTableStore {
     const sa: TableSteamAccountInterface[][] = [];
     let count = 0;
     let bufAccounts: TableSteamAccountInterface[] = [];
-    for (var i of Object.values(this.getSteamAccounts()).filter(sa=>!this.hidenSteamAccountsId.includes(sa.id))) {
+    for (var i of Object.values(this.getSteamAccounts()).filter(sa => !this.hidenSteamAccountsId.includes(sa.id))) {
       if (i.deleted && !this.showDeleted) continue;
 
       if (count === this.pageSize) {
@@ -352,7 +357,7 @@ class SteamAccountsTableStore {
       this.getSteamAccountsByPages()[this.activePage - 1];
     if (
       steamAccountsInPage.filter((p) => p.isSelected).length ===
-        steamAccountsInPage.filter((p) => !p.deleted).length &&
+      steamAccountsInPage.filter((p) => !p.deleted).length &&
       steamAccountsInPage.filter((p) => !p.deleted).length !== 0
     ) {
       this.isAllSelected = true;

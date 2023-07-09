@@ -28,7 +28,7 @@ const Attic: FC<{
                             return window.ErrorWindow.windowApi.close(props.id!);
                     }
                 }} />
-                <img className='attic__button attic__button--maximize' src={`./assets/img/Chrome${store.windows.isMainWindowMaximized ? "-maximize" : "-maximize-2"}.svg`} alt="" onClick={() => {
+                <img className='attic__button attic__button--maximize' src={`./assets/img/Chrome${store.windows.isMainWindowMaximized ? "-maximize-2" : "-maximize"}.svg`} alt="" onClick={() => {
                     if (store.windows.isMainWindowMaximized) {
                         switch (props.windowName) {
                             case "main":

@@ -9,13 +9,15 @@ import TableSettings from '../../../../globalComponents/TableSettings/TableSetti
 import SteamAccountsEditForm from './components/SteamAccountsEditForm/SteamAccountsEditForm';
 import SteamAccountsCreationForm from './components/SteamAccountsCreationForm/SteamAccountsCreationForm';
 import steamAccountsTableFields from '../../../../../electron/interfaces/TableFields/defaults/steamAccountsTableFields';
+import NewTable from '../../../../globalComponents/Table/NewTable';
+import AvalibleFieldTypes from '../../../../../electron/interfaces/TableFields/AvalibleFieldTypes';
 
 const SteamAccountsTab: FC = observer(() => {
     return (
         <>
             <div className='main'>
                 <SteamAccountsPanel />
-                <SteamAccountsTable />
+                <SteamAccountsTable /> 
                 <SteamAccountsFooter />
             </div>
             <SteamAccountsCreationForm />

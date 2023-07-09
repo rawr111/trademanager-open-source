@@ -1,25 +1,7 @@
-.layout {
-  width: 100%;
-  height: 100%;
-  padding-right: 20px;
-  background-image: url("/assets/gradient.png");
-  background-position: center;
-  border-radius: 30px;
-}
-
-.layout .content {
-  width: 100%;
-  height: calc(100% - 35px);
-  display: flex;
-  justify-content: space-between;
-}
-
 .main {
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding-left: 12px;
-  width: calc(100% - 72px);
 }
 
 .header {
@@ -47,4 +29,8 @@
     padding-left: 12px;
     width: calc(100% - 228px);
   }
+}
+
+#root {
+  padding-right: 20px;
 }

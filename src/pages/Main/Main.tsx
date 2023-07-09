@@ -15,7 +15,7 @@ import ExtensionTab from "./tabs/ExtensionsTab/ExtensionsTab";
 
 const Main = observer(() => {
   return (
-    <div className="layout">
+    <>
       <DndProvider backend={HTML5Backend}>
         <Attic windowName="main" />
         <div className="content">
@@ -28,7 +28,7 @@ const Main = observer(() => {
         <Prompt />
         <MiniNotification />
       </DndProvider>
-    </div>
+    </>
   );
 });
 

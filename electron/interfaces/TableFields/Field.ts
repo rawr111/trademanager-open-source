@@ -6,7 +6,8 @@ interface Field {
     sortDirection?: 'UP' | 'DOWN',
     isVisible: boolean,
     title: string,
-    showTtitleInTable: boolean
+    showTtitleInTable: boolean,
+    width?: 150
 }
 
 export default Field;

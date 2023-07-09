@@ -57,7 +57,7 @@ const Element: FC<{ line: Line }> = observer((props) => {
             background: props.line.deleted ? 'repeating-linear-gradient(-60deg, #555 0, #555 1px, transparent 1px, transparent 5px)' : ''
         }}>
             {
-                tableProps.fields.filter(f=>f.isVisible).map((field, index) => {
+                tableProps.fields.filter(f => f.isVisible).map((field, index) => {
                     const cell = props.line.cells.find(cell => cell.type === field.type);
                     if (!cell) return <></>;
                     return <div className='list-item' style={{ width: getFixedSize(field.type) }} key={index}>{

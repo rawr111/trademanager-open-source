@@ -14,6 +14,7 @@ import LoadingIcons from "react-loading-icons";
 import ReactTooltip from "react-tooltip";
 import uuid from "react-uuid";
 import { toJS } from "mobx";
+import NewTable from "../../../../../globalComponents/Table/NewTable";
 
 const SteamAccountsTableWrapper: FC = () => {
   const fields = store.steamAccountsTable.getFields();
@@ -36,8 +37,10 @@ const SteamAccountsTable: FC<{ fields: Field[] }> = observer(({ fields }) => {
       lines.push(generateLine(fields, steamAccount));
     }
 
+  console.log(lines);
+
   return (
-    <Table
+    <NewTable
       onSelect={(isSelected) => {
         store.steamAccountsTable.selectAllSteamAccounts(isSelected);
       }}
@@ -54,8 +57,8 @@ const SteamAccountsTable: FC<{ fields: Field[] }> = observer(({ fields }) => {
                   ? 1
                   : -1
                 : a.number > b.number
-                ? 1
-                : -1
+                  ? 1
+                  : -1
             );
           case AvalibleTypes.steamAccountNickname:
             return store.steamAccountsTable.sortSteamAccounts((a, b) =>
@@ -64,8 +67,8 @@ const SteamAccountsTable: FC<{ fields: Field[] }> = observer(({ fields }) => {
                   ? 1
                   : -1
                 : a.secondary.nickname > b.secondary.nickname
-                ? 1
-                : -1
+                  ? 1
+                  : -1
             );
           case AvalibleTypes.steamAccountBalance:
             return store.steamAccountsTable.sortSteamAccounts((a, b) =>
@@ -76,28 +79,28 @@ const SteamAccountsTable: FC<{ fields: Field[] }> = observer(({ fields }) => {
                   : -1
                 : a.changableSecondary.steam.balance! >
                   b.changableSecondary.steam.balance!
-                ? 1
-                : -1
+                  ? 1
+                  : -1
             );
           case AvalibleTypes.csgoTmBalance:
             return store.steamAccountsTable.sortSteamAccounts((a, b) =>
               direction === "UP"
                 ? (a.changableSecondary.market?.balance
-                    ? a.changableSecondary.market?.balance
-                    : 0) <
+                  ? a.changableSecondary.market?.balance
+                  : 0) <
                   (b.changableSecondary.market?.balance
                     ? b.changableSecondary.market?.balance
                     : 0)
                   ? 1
                   : -1
                 : (a.changableSecondary.market?.balance
-                    ? a.changableSecondary.market?.balance
-                    : 0) >
+                  ? a.changableSecondary.market?.balance
+                  : 0) >
                   (b.changableSecondary.market?.balance
                     ? b.changableSecondary.market?.balance
                     : 0)
-                ? 1
-                : -1
+                  ? 1
+                  : -1
             );
           case AvalibleTypes.ktState:
             return store.steamAccountsTable.sortSteamAccounts((a, b) =>
@@ -106,8 +109,8 @@ const SteamAccountsTable: FC<{ fields: Field[] }> = observer(({ fields }) => {
                   ? 1
                   : -1
                 : a.secondary.ktState > b.secondary.ktState
-                ? 1
-                : -1
+                  ? 1
+                  : -1
             );
           case AvalibleTypes.tpState:
             return store.steamAccountsTable.sortSteamAccounts((a, b) =>
@@ -116,8 +119,8 @@ const SteamAccountsTable: FC<{ fields: Field[] }> = observer(({ fields }) => {
                   ? 1
                   : -1
                 : a.secondary.tpState > b.secondary.tpState
-                ? 1
-                : -1
+                  ? 1
+                  : -1
             );
           case AvalibleTypes.tradeState:
             return store.steamAccountsTable.sortSteamAccounts((a, b) =>
@@ -126,8 +129,8 @@ const SteamAccountsTable: FC<{ fields: Field[] }> = observer(({ fields }) => {
                   ? 1
                   : -1
                 : a.secondary.tradeState > b.secondary.tradeState
-                ? 1
-                : -1
+                  ? 1
+                  : -1
             );
           case AvalibleTypes.steamAccountLevel:
             return store.steamAccountsTable.sortSteamAccounts((a, b) =>
@@ -136,8 +139,8 @@ const SteamAccountsTable: FC<{ fields: Field[] }> = observer(({ fields }) => {
                   ? 1
                   : -1
                 : a.secondary.level > b.secondary.level
-                ? 1
-                : -1
+                  ? 1
+                  : -1
             );
           case AvalibleTypes.steamAccountName:
             return store.steamAccountsTable.sortSteamAccounts((a, b) =>
@@ -146,8 +149,8 @@ const SteamAccountsTable: FC<{ fields: Field[] }> = observer(({ fields }) => {
                   ? 1
                   : -1
                 : a.accountName > b.accountName
-                ? 1
-                : -1
+                  ? 1
+                  : -1
             );
           case AvalibleTypes.steamPassword:
             return store.steamAccountsTable.sortSteamAccounts((a, b) =>
@@ -156,12 +159,12 @@ const SteamAccountsTable: FC<{ fields: Field[] }> = observer(({ fields }) => {
                   ? 1
                   : -1
                 : a.password > b.password
-                ? 1
-                : -1
+                  ? 1
+                  : -1
             );
         }
       }}
-    ></Table>
+    ></NewTable>
   );
 });
 
@@ -180,7 +183,7 @@ const generateLine = (
   return line;
 };
 
-const CellJSX: FC<{
+export const CellJSX: FC<{
   type: AvalibleTypes;
   steamAccount: TableSteamAccountInterface;
 }> = observer((props) => {
@@ -508,7 +511,7 @@ const CellJSX: FC<{
           <Checkbox
             isChecked={false}
             disabled={true}
-            onChange={(isChecked) => {}}
+            onChange={(isChecked) => { }}
           />
         );
       }

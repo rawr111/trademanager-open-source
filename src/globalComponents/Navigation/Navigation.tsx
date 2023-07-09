@@ -14,6 +14,7 @@ const Navigation: FC<{
 
   return (
     <div className="account-creation-navigation">
+      <h1>rfweasd</h1>
       <div className="account-creation-navigation__accounts">
         {
           props.buttons.map((button, index) => {
