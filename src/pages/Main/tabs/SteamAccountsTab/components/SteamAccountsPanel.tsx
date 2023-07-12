@@ -7,9 +7,9 @@ import store from '../../../../../store/store';
 const ProxiesPanel = observer(() => {
     return (
         <div className="panel">
-            <div className="panel-content">
-                <h1 className="panel-text_main">Steam аккаунты</h1>
-                <div className="panel-content__options">
+            <div className="panel__content">
+                <h1 className="panel__title">Steam аккаунты</h1>
+                <div className="panel__buttons">
                     {/* <div className="header-content__buttons-container">
             <div className="button-default" id="panel_settings" onClick={()=>{
               store.openTableSettings();
@@ -42,8 +42,8 @@ const ProxiesPanel = observer(() => {
                         hoverColor="gradient"
                         color="grey"
                         size="large"
-                        img="./assets/img/Folder.png"
-                        hoverImg="./assets/img/FolderHov.png"
+                        img="./assets/img/Table-panel-folder.svg"
+                        hoverImg="./assets/img/Table-panel-folder-hov.svg"
                         className="button-default"
                         onClick={() => {
                             window.Main.window.openAppdata();
@@ -55,8 +55,8 @@ const ProxiesPanel = observer(() => {
                         hoverColor="gradient"
                         color="grey"
                         size="large"
-                        img="./assets/img/SettingsA.svg"
-                        hoverImg="./assets/img/SettingsA_hov.svg"
+                        img="./assets/img/Table-panel-settings.svg"
+                        hoverImg="./assets/img/Table-panel-settings-hov.svg"
                         className="button-default"
                         onClick={() => {
                             store.steamAccountsTable.settingsForm.open();
@@ -69,8 +69,8 @@ const ProxiesPanel = observer(() => {
                         hoverColor="gradient"
                         color="grey"
                         size="large"
-                        img="./assets/img/Refresh.svg"
-                        hoverImg="./assets/img/Refresh_hov.svg"
+                        img="./assets/img/Table-panel-refresh.svg"
+                        hoverImg="./assets/img/Table-panel-refresh-hov.svg"
                         className="button-default"
                         onClick={() => {
                             console.log('send refresh req')
@@ -87,33 +87,11 @@ const ProxiesPanel = observer(() => {
 
                     <Button
                         size="large"
-                        img="./assets/img/Mark.svg"
+                        img="./assets/img/Table-panel-button-add.svg"
                         text="Добавить аккаунт"
                         className="headline-button_gradient"
                         onClick={() => {
                             store.steamAccountsTable.creationForm.open();
-                        }}
-                    />
-
-                    <Button
-                        view="icon"
-                        hoverColor="light-grey"
-                        color="grey"
-                        size="large"
-                        img={store.steamAccountsTable.showDeleted ? "./assets/img/Open.svg" : "./assets/img/Hide.svg"}
-
-                        className="button-default"
-                        onClick={() => {
-                            if (store.steamAccountsTable.showDeleted)
-                                for (var i = store.steamAccountsTable.activePage; i >= 1; i--) {
-                                    const steamAccountsInPage = store.steamAccountsTable.getSteamAccountsByPages()[i - 1];
-                                    if (steamAccountsInPage && (steamAccountsInPage.filter(sa => sa.deleted).length != steamAccountsInPage.length)) {
-                                        store.steamAccountsTable.setActivePage(i);
-                                        break;
-                                    }
-                                }
-
-                            store.steamAccountsTable.changeShowStatus();
                         }}
                     />
                 </div>

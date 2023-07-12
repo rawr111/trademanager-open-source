@@ -10,24 +10,22 @@
   user-select: none;
 }
 
-.panel-text_main {
+.panel__title {
   margin-right: 30px;
   white-space: nowrap;
 }
 
-.panel-content {
+.panel__content {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.panel-content__options {
+.panel__buttons {
   display: flex;
-  width: 100%;
-  justify-content: flex-end;
+  gap: 10px;
 }
-
 
 .header-content__buttons-container {
   display: flex;
