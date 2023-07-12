@@ -1900,6 +1900,11 @@
     "@types/react" "*"
     csstype "^3.0.2"
 
+"@types/text-metrics@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.npmjs.org/@types/text-metrics/-/text-metrics-3.0.0.tgz"
+  integrity sha512-9SZ04CuRZ1YXDqBUaeIHxRihsqk5vVf7k7xZZP9TD5hR+7Gr5xrowKthI2Ou9WOYim9RO5GWn7pkKVj49/77Ig==
+
 "@types/tough-cookie@*":
   version "4.0.2"
   resolved "https://registry.npmjs.org/@types/tough-cookie/-/tough-cookie-4.0.2.tgz"
@@ -9393,6 +9398,11 @@ terser@^5.10.0, terser@^5.7.2:
     commander "^2.20.0"
     source-map "~0.7.2"
     source-map-support "~0.5.20"
+
+text-metrics@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.npmjs.org/text-metrics/-/text-metrics-3.0.0.tgz"
+  integrity sha512-WQhzFiIKLJEPyhyLqL9nGkF0wnu808zinvBy/v1925nIYtm8kDAc7fIqhKfdviXLwmkwSfF65ZKu8I5Fx5XNGw==
 
 throttleit@0.0.2:
   version "0.0.2"

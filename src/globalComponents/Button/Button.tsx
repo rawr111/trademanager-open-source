@@ -22,7 +22,6 @@ const Button: FC<IButtonProps> = (props: IButtonProps) => {
     hoverColor = "gradient",
     className,
     onClick,
-    isNonGuardButton = true,
     altText
   } = props;
 

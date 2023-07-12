@@ -11,45 +11,41 @@ const defaultTableOptions = {
 
 const store = new Store();
 
-console.log(store.path);
-
-type Table = 'steamAccounts' | 'proxies';
-
 class TableStorage {
-    static GetFields(type: Table) {
-        const fields = store.get(`${type}TableFields`);
-        if (!fields) {
-            if (type === 'steamAccounts') {
-                store.set(`${type}TableFields`, defaultSteamAccountTableFields);
-                return defaultSteamAccountTableFields;
+    static GetFields(type: 'steamAccounts' | 'proxies'): Field[] {
+        try {
+            const fields = store.get(`${type}TableFields`) as Field[];
+
+            if (!fields || !fields[0].width || fields.length != defaultSteamAccountTableFields.length) {
+                const fieldsToSave = type == "steamAccounts" ? defaultSteamAccountTableFields : defaultProxyTableFields;
+                store.set(`${type}TableFields`, fieldsToSave);
+                return fieldsToSave;
             }
-            if (type === 'proxies') {
-                store.set(`${type}TableFields`, defaultProxyTableFields);
-                return defaultProxyTableFields;
-            }
-            throw new Error(`${type} - fields is undefined`);
+
+            return fields;
+        } catch (err) {
+            throw new Error(`Error in get fields. ${err}`);
         }
-        return fields as Field[];
     }
-    static GetOptions(type: Table) {
-        const options = store.get(`${type}TableOptions`);
-        if (!options) {
-            if (type === 'steamAccounts') {
+
+    static GetOptions(type: 'steamAccounts' | 'proxies') {
+        try {
+            const options = store.get(`${type}TableOptions`);
+            if (!options) {
                 store.set(`${type}TableOptions`, defaultTableOptions);
                 return defaultTableOptions;
             }
-            if (type === 'proxies') {
-                store.set(`${type}TableOptions`, defaultTableOptions);
-                return defaultTableOptions;
-            }
-            throw new Error(`${type} - fields is undefined`);
+            return options as Field[];
+        } catch (err) {
+            throw new Error(`Error in get options. ${err}`);
         }
-        return options as Field[];
     }
-    static EditFields(type: Table, fields: Field[]) {
+
+    static EditFields(type: 'steamAccounts' | 'proxies', fields: Field[]) {
         store.set(`${type}TableFields`, fields);
     }
-    static EditOptions(type: Table, options: TableOptions) {
+
+    static EditOptions(type: 'steamAccounts' | 'proxies', options: TableOptions) {
         store.set(`${type}TableOptions`, options);
     }
 }

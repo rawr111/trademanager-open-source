@@ -1,5 +1,6 @@
 import react, { FC } from 'react';
 import { observer } from 'mobx-react';
+import "./MiniWindow.css";
 
 interface MiniWindowInterface {
     title: string;
@@ -12,13 +13,16 @@ interface MiniWindowInterface {
 
 const MiniWindow: FC<MiniWindowInterface> = observer((props) => {
     return (
-        <div className='darkBackground' onClick={(event) => {
+        <div className='dark-background' onClick={(event) => {
             const target = event.target as HTMLDivElement;
-            if (target.className === 'darkBackground' || target.className === 'form-cross') props.onClose();
+            if (target.className === 'dark-background' || target.className === 'table-settings__cross') props.onClose();
         }}>
-            <div className='form table-settings' style={{ width: props.width, height: props.height }}>
-                <div className='form-caption'><div>{props.title}</div><div className='form-cross'></div></div>
-                <div className='form-content' style={{ height: `calc(${props.height} - 40px)`, maxHeight: `calc(${props.maxHeight} - 40px)`, overflow: 'auto', minHeight: '200px' }}>
+            <div className='table-settings' style={{ width: props.width, height: props.height }}>
+                <div className='table-settings__caption'>
+                    <div>{props.title}</div>
+                    <div className='table-settings__cross'></div>
+                    </div>
+                <div className='table-settings__content' style={{ height: `calc(${props.height} - 40px)`, maxHeight: `calc(${props.maxHeight} - 40px)`, overflow: 'auto', minHeight: '200px' }}>
                     {props.content}
                 </div>
             </div>

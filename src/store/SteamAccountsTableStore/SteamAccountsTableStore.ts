@@ -96,46 +96,8 @@ class SteamAccountsTableStore {
       //this.writeChangableSecondariesError(data.id, String(data.err));
     });
     window.Main.steamAccounts.onGetTableFields((event, fields) => {
-      console.log(fields);
       runInAction(() => {
-        this.fields = [
-          {
-            type: AvalibleTypes.checkbox,
-            isSortable: false,
-            isVisible: true,
-            title: "",
-            showTtitleInTable: false,
-          },
-          ...fields,
-          {
-            type: AvalibleTypes.refreshButton,
-            isSortable: false,
-            isVisible: true,
-            title: "",
-            showTtitleInTable: false,
-          },
-          {
-            type: AvalibleTypes.exportButton,
-            isSortable: false,
-            isVisible: true,
-            title: "",
-            showTtitleInTable: false,
-          },
-          {
-            type: AvalibleTypes.editingButton,
-            isSortable: false,
-            isVisible: true,
-            title: "",
-            showTtitleInTable: false,
-          },
-          {
-            type: AvalibleTypes.deleteButton,
-            isSortable: false,
-            isVisible: true,
-            title: "",
-            showTtitleInTable: false,
-          },
-        ]
+        this.fields = fields;
       });
       console.log(this.fields);
     });

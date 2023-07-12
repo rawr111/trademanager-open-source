@@ -7,7 +7,7 @@ interface Field {
     isVisible: boolean,
     title: string,
     showTtitleInTable: boolean,
-    width?: 150
+    width?: number
 }
 
 export default Field;

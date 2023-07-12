@@ -1,4 +1,4 @@
-import react, { FC, useEffect } from "react";
+import { FC, useEffect } from "react";
 import Table, { Line, Cell } from "../../../../../globalComponents/Table/Table";
 import AvalibleTypes from "../../../../../../electron/interfaces/TableFields/AvalibleFieldTypes";
 import store from "../../../../../store/store";
@@ -13,8 +13,6 @@ import Guard from "../../../components/Guard/Guard";
 import LoadingIcons from "react-loading-icons";
 import ReactTooltip from "react-tooltip";
 import uuid from "react-uuid";
-import { toJS } from "mobx";
-import NewTable from "../../../../../globalComponents/Table/NewTable";
 
 const SteamAccountsTableWrapper: FC = () => {
   const fields = store.steamAccountsTable.getFields();
@@ -22,12 +20,9 @@ const SteamAccountsTableWrapper: FC = () => {
 };
 
 const SteamAccountsTable: FC<{ fields: Field[] }> = observer(({ fields }) => {
-  const steamAccountsByPage =
-    store.steamAccountsTable.getSteamAccountsByPages();
-
-  console.log("accounts by pages: ", steamAccountsByPage);
-
+  const steamAccountsByPage = store.steamAccountsTable.getSteamAccountsByPages();
   const lines: Line[] = [];
+
   if (steamAccountsByPage[store.steamAccountsTable.activePage - 1])
     for (var steamAccount of steamAccountsByPage[
       store.steamAccountsTable.activePage - 1
@@ -37,10 +32,17 @@ const SteamAccountsTable: FC<{ fields: Field[] }> = observer(({ fields }) => {
       lines.push(generateLine(fields, steamAccount));
     }
 
-  console.log(lines);
-
   return (
-    <NewTable
+    <Table
+      onChangeFieldWidth={(type, newWidth) => {
+        const field = fields.find(f => f.type == type);
+        if (field){
+          field.width = newWidth;
+          console.log(fields);
+          console.log(type, newWidth);
+          window.Main.steamAccounts.saveTableFields(fields);
+        }
+      }}
       onSelect={(isSelected) => {
         store.steamAccountsTable.selectAllSteamAccounts(isSelected);
       }}
@@ -164,7 +166,7 @@ const SteamAccountsTable: FC<{ fields: Field[] }> = observer(({ fields }) => {
             );
         }
       }}
-    ></NewTable>
+    ></Table>
   );
 });
 
@@ -186,12 +188,9 @@ const generateLine = (
 export const CellJSX: FC<{
   type: AvalibleTypes;
   steamAccount: TableSteamAccountInterface;
-}> = observer((props) => {
-  const { type, steamAccount } = props;
-  const changableSecondaries =
-    store.steamAccountsTable.changableSecondaries[steamAccount.id];
-  const browserStatus =
-    store.steamAccountsTable.browserStatuses[steamAccount.id];
+}> = observer(({ type, steamAccount }) => {
+  const changableSecondaries = store.steamAccountsTable.changableSecondaries[steamAccount.id];
+  const browserStatus = store.steamAccountsTable.browserStatuses[steamAccount.id];
 
   switch (type) {
     case AvalibleTypes.mail:
@@ -202,25 +201,19 @@ export const CellJSX: FC<{
       ) : (
         <>нет</>
       );
-
     case AvalibleTypes.profileName:
       return <>{steamAccount.profileName ? steamAccount.profileName : ""}</>;
     case AvalibleTypes.steamAccountButtons:
       return (
-        <div
-          style={{
-            display: "flex",
-          }}
-        >
+        <div className="steam-account-buttons">
           <Button
             disabled={steamAccount.deleted}
             size="tiny"
             color="grey"
             hoverColor="dark-pink"
             view="icon"
-            style={{ marginRight: "5px" }}
-            img="./assets/img/Confirm.svg"
-            hoverImg="./assets/img/confirm_hov.svg"
+            img="./assets/img/Table-confirmations.svg"
+            hoverImg="./assets/img/Table-confirmations-hov.svg"
             onClick={() => {
               window.Main.steamAccounts.openConfirmations({
                 id: steamAccount.id,
@@ -236,9 +229,8 @@ export const CellJSX: FC<{
             color="grey"
             hoverColor="dark-pink"
             view="icon"
-            style={{ marginRight: "5px" }}
-            img="./assets/img/MiniRefresh.svg"
-            hoverImg="./assets/img/MiniRefreshHover.svg"
+            img="./assets/img/Table-update.svg"
+            hoverImg="./assets/img/Table-update-hov.svg"
             onClick={() => {
               store.steamAccountsTable.loadSecondaries(steamAccount.id);
             }}
@@ -251,9 +243,8 @@ export const CellJSX: FC<{
             color="grey"
             hoverColor="dark-pink"
             view="icon"
-            style={{ marginRight: "5px" }}
-            img="./assets/img/RefreshSession.svg"
-            hoverImg="./assets/img/RefreshSessionHover.svg"
+            img="./assets/img/Table-relogin.svg"
+            hoverImg="./assets/img/Table-relogin-hov.svg"
             onClick={() => {
               store.steamAccountsTable.refreshSession(steamAccount.id);
             }}
@@ -265,9 +256,8 @@ export const CellJSX: FC<{
             color="grey"
             hoverColor="dark-pink"
             view="icon"
-            style={{ marginRight: "5px" }}
-            img="./assets/img/MiniMaFile.svg"
-            hoverImg="./assets/img/MiniMaFileHover.svg"
+            img="./assets/img/Table-mafile.svg"
+            hoverImg="./assets/img/Table-mafile-hov.svg"
             onClick={() => {
               const el = document.getElementById(
                 `exportMaFile${steamAccount.id}`
@@ -276,9 +266,7 @@ export const CellJSX: FC<{
             }}
             altText="Сохранить maFile как"
           />
-
           <a
-            style={{ display: "none" }}
             id={`exportMaFile${steamAccount.id}`}
             href={
               "data:text/json;charset=utf-8," +
@@ -290,101 +278,39 @@ export const CellJSX: FC<{
           ></a>
         </div>
       );
+
     case AvalibleTypes.tradeState:
       if (steamAccount.deleted) return <></>;
-      return (
-        <>
-          {steamAccount.isLoadSecondary ? (
-            <div>
-              <LoadingIcons.ThreeDots className="micro-download" />
-            </div>
-          ) : (
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                paddingRight: "30px",
-              }}
-            >
-              {steamAccount.secondary.tradeState ? (
-                <img src="./assets/img/okStatus.svg" alt="" />
-              ) : (
-                <img src="./assets/img/noStatus.svg" />
-              )}
-            </div>
-          )}
-        </>
-      );
+      return steamAccount.isLoadSecondary ? <LoadingIcons.ThreeDots className="micro-download" /> : steamAccount.secondary.tradeState ? <img src="./assets/img/Status-ok.svg" alt="" /> : <img src="./assets/img/Status-no.svg" />;
+
     case AvalibleTypes.ktState:
       if (steamAccount.deleted) return <></>;
-      return (
-        <>
-          {steamAccount.isLoadSecondary ? (
-            <div>
-              <LoadingIcons.ThreeDots className="micro-download" />
-            </div>
-          ) : (
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                paddingRight: "25px",
-              }}
-            >
-              {steamAccount.secondary.ktState ? (
-                <img src="./assets/img/ktStatus.svg" />
-              ) : (
-                <img src="./assets/img/okStatus.svg" />
-              )}
-            </div>
-          )}
-        </>
-      );
+      return steamAccount.isLoadSecondary ? <LoadingIcons.ThreeDots className="micro-download" /> : steamAccount.secondary.ktState ? <img src="./assets/img/Status-kt.svg" /> : <img src="./assets/img/Status-ok.svg" />;
+
     case AvalibleTypes.tpState:
       if (steamAccount.deleted) return <></>;
-      return (
-        <>
-          {steamAccount.isLoadSecondary ? (
-            <div>
-              <LoadingIcons.ThreeDots className="micro-download" />
-            </div>
-          ) : (
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                paddingRight: "25px",
-              }}
-            >
-              {steamAccount.secondary.tpState ? (
-                <img src="./assets/img/okStatus.svg" />
-              ) : (
-                <img src="./assets/img/noStatus.svg" />
-              )}
-            </div>
-          )}
-        </>
-      );
+      return steamAccount.isLoadSecondary ? <LoadingIcons.ThreeDots className="micro-download" /> : steamAccount.secondary.tpState ? <img src="./assets/img/Status-ok.svg" /> : <img src="./assets/img/Status-no.svg" />;
+
     case AvalibleTypes.csgoTmBalance:
       if (steamAccount.deleted) return <></>;
       if (changableSecondaries.isLoad) {
         const uniqueId = uuid();
         if (changableSecondaries.content.market.error) {
-          return (
-            <div data-tip="React-tooltip" data-for={uniqueId}>
-              Ошибка(?)
-              <ReactTooltip
-                place="top"
-                type="dark"
-                effect="float"
-                id={uniqueId}
-              >
-                <div className="alt-text-container">
-                  {String(changableSecondaries.content.market.error)}
-                </div>
-              </ReactTooltip>
-            </div>
-          );
+          return <div
+            data-tip="React-tooltip"
+            data-for={uniqueId}>
+            Ошибка(?)
+            <ReactTooltip
+              place="top"
+              type="dark"
+              effect="float"
+              id={uniqueId}
+            >
+              <div className="alt-text-container">
+                {String(changableSecondaries.content.market.error)}
+              </div>
+            </ReactTooltip>
+          </div>
         } else {
           return changableSecondaries.content.market ? (
             <>
@@ -396,12 +322,9 @@ export const CellJSX: FC<{
           );
         }
       } else {
-        return (
-          <div>
-            <LoadingIcons.ThreeDots className="micro-download" />
-          </div>
-        );
+        return <LoadingIcons.ThreeDots className="micro-download" />;
       }
+
     case AvalibleTypes.steamAccountBalance:
       if (steamAccount.deleted) return <></>;
 
@@ -432,68 +355,43 @@ export const CellJSX: FC<{
           );
         }
       } else {
-        return (
-          <div>
-            <LoadingIcons.ThreeDots className="micro-download" />
-          </div>
-        );
+        return <LoadingIcons.ThreeDots className="micro-download" />;
       }
+
     case AvalibleTypes.tmApiKey:
       return steamAccount.tmApiKey ? (
         <Password password={steamAccount.tmApiKey} />
       ) : (
         <>Нет</>
       );
+
     case AvalibleTypes.steamGuard:
-      return (
-        <>
-          {steamAccount.deleted ? (
-            ""
-          ) : (
-            <Guard code={store.steamAccountsTable.authCodes[steamAccount.id]} />
-          )}
-        </>
-      );
+      return steamAccount.deleted ? <></> : <Guard code={store.steamAccountsTable.authCodes[steamAccount.id]} />;
+
     case AvalibleTypes.steamAccountName:
       return <>{steamAccount.accountName}</>;
+
     case AvalibleTypes.steamPassword:
       return <Password password={steamAccount.password} />;
+
     case AvalibleTypes.steamAccountNickname:
-      return (
-        <>
-          {steamAccount.isLoadSecondary ? (
-            <LoadingIcons.ThreeDots className="micro-download" />
-          ) : (
-            steamAccount.secondary.nickname
-          )}
-        </>
-      );
+      return steamAccount.isLoadSecondary ? <LoadingIcons.ThreeDots className="micro-download" /> : <>{steamAccount.secondary.nickname}</>;
+
     case AvalibleTypes.steamAccountLevel:
-      return (
-        <>
-          {steamAccount.isLoadSecondary ? (
-            <LoadingIcons.ThreeDots className="micro-download" />
-          ) : (
-            steamAccount.secondary.level
-          )}
-        </>
-      );
+      return steamAccount.isLoadSecondary ? <LoadingIcons.ThreeDots className="micro-download" /> : <>{steamAccount.secondary.level}</>;
+
     case AvalibleTypes.steamAccountAvatar:
-      return (
-        <>
-          {steamAccount.isLoadSecondary ? (
-            <div className="steam-account-avatar">
-              <LoadingIcons.ThreeDots className="micro-download" />
-            </div>
-          ) : (
-            <img
-              src={steamAccount.secondary.avatarUrl}
-              className="steam-account-avatar"
-              style={{ backgroundColor: "black" }}
-            />
-          )}
-        </>
-      );
+      return steamAccount.isLoadSecondary ?
+        <div className="steam-account-avatar">
+          <LoadingIcons.ThreeDots className="micro-download" />
+        </div>
+        :
+        <img
+          src={steamAccount.secondary.avatarUrl}
+          className="steam-account-avatar"
+          style={{ backgroundColor: "black" }}
+        />;
+
     case AvalibleTypes.linkedProxies:
       if (steamAccount.proxy) {
         return (
@@ -505,6 +403,7 @@ export const CellJSX: FC<{
       } else {
         return <>нет</>;
       }
+
     case AvalibleTypes.checkbox:
       if (steamAccount.deleted) {
         return (
@@ -526,80 +425,115 @@ export const CellJSX: FC<{
           }}
         />
       );
+
     case AvalibleTypes.number:
       return <>{steamAccount.number}</>;
-    case AvalibleTypes.exportButton:
-      return (
-        <div>
-          <Button
-            size="small"
-            color="grey"
-            hoverColor="light-grey"
-            view="icon"
-            img="./assets/img/Export.svg"
-            onClick={() => {
-              const el = document.getElementById(
-                `exportSmaFile${steamAccount.id}`
-              );
-              el?.click();
-            }}
-            altText="Экспорт данных аккаунта (smaFile)"
-          />
-          <a
-            style={{ display: "none" }}
-            id={`exportSmaFile${steamAccount.id}`}
-            href={
-              "data:text/json;charset=utf-8," +
-              encodeURIComponent(JSON.stringify(steamAccount.smaFile))
-            }
-            download={`${steamAccount.accountName}.smaFile`}
-          ></a>
-        </div>
-      );
+
+    case AvalibleTypes.accountTools:
+      return <div className="account-tools">
+        <Button
+          size="small"
+          color="grey"
+          hoverColor="light-grey"
+          view="icon"
+          img="./assets/img/Table-export.svg"
+          hoverImg="./assets/img/Table-export-hov.svg"
+          onClick={() => {
+            const el = document.getElementById(
+              `exportSmaFile${steamAccount.id}`
+            );
+            el?.click();
+          }}
+          altText="Экспорт данных аккаунта (smaFile)"
+        />
+        <a
+          style={{ display: "none" }}
+          id={`exportSmaFile${steamAccount.id}`}
+          href={
+            "data:text/json;charset=utf-8," +
+            encodeURIComponent(JSON.stringify(steamAccount.smaFile))
+          }
+          download={`${steamAccount.accountName}.smaFile`}
+        ></a>
+        <Button
+          size="small"
+          color="grey"
+          hoverColor="light-grey"
+          view="icon"
+          img="./assets/img/Table-edit.svg"
+          hoverImg="./assets/img/Table-edit-hov.svg"
+          onClick={() => {
+            store.steamAccountsTable.editingForm.open(steamAccount);
+          }}
+          altText="Редактирование данных Steam аккаунта"
+        />
+        <Button
+          size="small"
+          color="grey"
+          hoverColor="light-grey"
+          view="icon"
+          img="./assets/img/Table-delete.svg"
+          hoverImg="./assets/img/Table-delete-hov.svg"
+          onClick={() => {
+            store.windows.prompt({
+              type: "question",
+              title: `Хотите отправить Steam аккаунт №${steamAccount.number} в архив?`,
+              text: "Его всегда можно будет восстановить или удалить окончательно (просто кликни на глазик в верхней панели)",
+              acceptButtonText: "Убрать в архив!",
+              cancelButtonText: "Отмена",
+              cb: () => {
+                store.steamAccountsTable.editSteamAccount(steamAccount.id, {
+                  deleted: true,
+                });
+                window.Main.steamAccounts.edit(
+                  steamAccount.id,
+                  { deleted: true },
+                  { proxyId: null }
+                );
+                //window.Main.steamAccounts.get();
+              },
+            });
+          }}
+        />
+      </div>;
+
     case AvalibleTypes.startButton:
       switch (browserStatus) {
         case "working":
-          return (
-            <div style={{ display: "flex" }}>
-              <div
-                className="browser-btn stop-browser-btn"
-                onClick={() => {
-                  window.Main.steamAccounts.stopBrowser(steamAccount.id);
-                }}
-              >
-                STOP
-              </div>
-              <Button
-                disabled={steamAccount.deleted}
-                size="tiny"
-                color="grey"
-                hoverColor="dark-pink"
-                view="icon"
-                style={{ marginRight: "5px" }}
-                img="./assets/img/focus.svg"
-                onClick={() => {
-                  window.Main.steamAccounts.focusBrowser(steamAccount.id);
-                }}
-                altText="Поднять браузер наверх"
-              />
-            </div>
-          );
+          return <div className="browser-btn-wrapper">
+            <div className="browser-btn browser-btn--stop"
+              onClick={() => {
+                window.Main.steamAccounts.stopBrowser(steamAccount.id);
+              }}>STOP</div>
+            <Button
+              disabled={steamAccount.deleted}
+              size="tiny"
+              color="grey"
+              hoverColor="dark-pink"
+              view="icon"
+              style={{ marginRight: "5px" }}
+              img="./assets/img/Table-browser-to-top.svg"
+              hoverImg="./assets/img/Table-browser-to-top-hov.svg"
+              onClick={() => {
+                window.Main.steamAccounts.focusBrowser(steamAccount.id);
+              }}
+              altText="Поднять браузер наверх"
+            />
+          </div>;
+
         case "notworking":
-          return (
-            <div>
-              <div
-                className="browser-btn start-browser-btn"
-                onClick={() => {
-                  window.Main.steamAccounts.startBrowser(steamAccount.id);
-                }}
-              >
-                START
-              </div>
-            </div>
-          );
+          return <div
+            className="browser-btn browser-btn--start"
+            onClick={() => {
+              window.Main.steamAccounts.startBrowser(steamAccount.id);
+            }}
+          >
+            START
+          </div>
+
         default:
           return (
-            <div className="browser-btn download-browser-btn">
+            <div className="browser-btn browser-btn--wait">
               <LoadingIcons.Bars
                 style={{ width: "20px", height: "20px", marginTop: "3px" }}
               />
@@ -607,85 +541,6 @@ export const CellJSX: FC<{
           );
       }
 
-    case AvalibleTypes.editingButton:
-      if (steamAccount.deleted) {
-        return (
-          <Button
-            size="small"
-            color="grey"
-            hoverColor="light-grey"
-            view="icon"
-            img="./assets/img/restoreProfile.svg"
-            onClick={() => {
-              //store.steamAccountsTable.editSteamAccount(steamAccount.id, { deleted: false });
-              window.Main.steamAccounts.edit(
-                steamAccount.id,
-                { deleted: false },
-                { proxyId: null }
-              );
-              window.Main.steamAccounts.get();
-            }}
-            altText="Восстановить Steam аккаунт"
-          />
-        );
-      } else {
-        return (
-          <Button
-            size="small"
-            color="grey"
-            hoverColor="light-grey"
-            view="icon"
-            img="./assets/img/Edit.svg"
-            onClick={() => {
-              store.steamAccountsTable.editingForm.open(steamAccount);
-            }}
-            altText="Редактирование данных Steam аккаунта"
-          />
-        );
-      }
-    case AvalibleTypes.deleteButton:
-      return (
-        <Button
-          size="small"
-          color="grey"
-          hoverColor="light-grey"
-          view="icon"
-          img="./assets/img/Trash.svg"
-          onClick={() => {
-            if (steamAccount.deleted) {
-              store.windows.prompt({
-                type: "question",
-                title: `Хотите безвозвратно удалить Steam аккаунт №${steamAccount.number}?`,
-                text: "Это действие невозможно будет отменить",
-                acceptButtonText: "Удалить его!",
-                cancelButtonText: "Отмена",
-                cb: () => {
-                  window.Main.steamAccounts.delete(steamAccount.id);
-                },
-              });
-            } else {
-              store.windows.prompt({
-                type: "question",
-                title: `Хотите отправить Steam аккаунт №${steamAccount.number} в архив?`,
-                text: "Его всегда можно будет восстановить или удалить окончательно (просто кликни на глазик в верхней панели)",
-                acceptButtonText: "Убрать в архив!",
-                cancelButtonText: "Отмена",
-                cb: () => {
-                  store.steamAccountsTable.editSteamAccount(steamAccount.id, {
-                    deleted: true,
-                  });
-                  window.Main.steamAccounts.edit(
-                    steamAccount.id,
-                    { deleted: true },
-                    { proxyId: null }
-                  );
-                  //window.Main.steamAccounts.get();
-                },
-              });
-            }
-          }}
-        />
-      );
     default:
       return <></>;
   }

@@ -1,11 +1,15 @@
-.checkbox-default, .checkbox-checked {
+.checkbox {
     width: 22px;
     height: 22px;
     border-radius: 5px;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    display: inline-block;
+    display: flex;
+    justify-content: center;
+    padding: 5px;
     cursor: pointer;
-    margin-right: 10px;
+    background-color: #372447;
+    user-select: none;
+}
+
+.checkbox--checked {
+    background: linear-gradient(121.85deg, #ff00e5 2.04%, #7000ff 108.41%);
 }

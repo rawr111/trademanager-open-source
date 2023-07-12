@@ -6,7 +6,7 @@ function Password(props: IPasswordProps) {
   const { password, style, placeholder } = props;
 
   return (
-    <div className="password text-white-large" style={style}>
+    <div className="password" style={style}>
       <div className="password__text" style={{ maxWidth: '150px' }}>
         {password.length === 0 ? placeholder : (show ? password : password.split("").map((_) => "•"))}
       </div>
@@ -15,7 +15,7 @@ function Password(props: IPasswordProps) {
           cursor: 'pointer'
         }}
         className="password__button"
-        src="./assets/img/Password_show.svg"
+        src="./assets/img/Password-eye.svg"
         onClick={() => {
           setShow(!show);
         }}

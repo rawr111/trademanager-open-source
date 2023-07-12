@@ -7,14 +7,6 @@
   justify-content: center;
 }
 
-.button-default {
-  margin-right: 10px;
-}
-
-.button-default:last-child {
-  margin-right: 0px;
-}
-
 .button--dark-pink {
   background: #7003A3;
 }
@@ -43,11 +35,6 @@
   font-size: 14px;
   line-height: 19px;
   color: #ffffff;
-}
-
-.headline-button_gradient {
-  margin-right: 13px;
-  margin-left: 13px;
 }
 
 .button--hoverColor-light-grey:hover {
@@ -100,8 +87,4 @@
 .button--view-default.button--size-large {
   min-width: 200px;
   height: 43px;
-}
-
-.button--view-default .button__icon+.button__text {
-  margin-left: 15px;
 }

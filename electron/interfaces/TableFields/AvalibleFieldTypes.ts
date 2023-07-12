@@ -20,9 +20,6 @@ enum AvalibleFieldTypes {
     mail = "mail",
     mailPassword = "mailPassword",
     refreshButton = "refreshButton",
-    exportButton = "exportButton",
-    editingButton = "editingButton",
-    deleteButton = "deleteButton",
     miniProxy = "miniProxy",
     proxyUsername = "proxyUsername",
     proxyPassword = "proxyPassword",
@@ -33,7 +30,7 @@ enum AvalibleFieldTypes {
     linkedProxies = "linkedProxies",
     testProxyButton = "testProxyButton",
     chromeStartButton = "chromeStartButton",
-    
+    accountTools = "accountTools"
 }
 
 export default AvalibleFieldTypes;

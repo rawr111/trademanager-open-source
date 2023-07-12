@@ -1,6 +1,5 @@
 import Attic from "../../globalComponents/Attic/Attic";
 import "./Main.css";
-import "../../css/Form.css";
 import Navigation from "./components/Navigation/Navigation";
 import Prompt from "../../globalComponents/Prompt/Prompt";
 import MiniNotification from "../../globalComponents/Notifications/MiniNotifitcation";
