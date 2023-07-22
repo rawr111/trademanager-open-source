@@ -29,22 +29,22 @@ const TablePageSwitcher: FC<{
                     <img onClick={() => {
                         if (activePageNumber === 1 || numberOfPages === 0) return;
                         onChangeActivePage(1);
-                    }} style={{ cursor: activePageNumber === 1 || numberOfPages === 0 ? 'default' : 'pointer' }} src={activePageNumber === 1 || numberOfPages === 0 ? "./assets/img/firstPageArrowNonActive.svg" : "./assets/img/firstPageArrow.svg"} className="page-switcher-img" alt="" />
+                    }} style={{ cursor: activePageNumber === 1 || numberOfPages === 0 ? 'default' : 'pointer' }} src={activePageNumber === 1 || numberOfPages === 0 ? "./assets/img/Footer-first-page-not-active.svg" : "./assets/img/Footer-first-page.svg"} className="page-switcher-img" alt="" />
                     <img onClick={() => {
                         if (activePageNumber === 1 || numberOfPages === 0) return;
                         onChangeActivePage(activePageNumber - 1);
-                    }} style={{ cursor: activePageNumber === 1 || numberOfPages === 0 ? 'default' : 'pointer' }} src={activePageNumber === 1 || numberOfPages === 0 ? "./assets/img/prevPageNonActive.svg" : "./assets/img/prevPage.svg"} className="page-switcher-img" alt="" />
+                    }} style={{ cursor: activePageNumber === 1 || numberOfPages === 0 ? 'default' : 'pointer' }} src={activePageNumber === 1 || numberOfPages === 0 ? "./assets/img/Footer-prev-page-not-active.svg" : "./assets/img/Footer-prev-page.svg"} className="page-switcher-img" alt="" />
                 </div>
                 <div>
                     <img onClick={() => {
                         if (activePageNumber === numberOfPages || numberOfPages === 0) return;
                         onChangeActivePage(activePageNumber + 1);
-                    }} style={{ cursor: activePageNumber >= numberOfPages || numberOfPages === 0 ? 'default' : 'pointer' }} src={activePageNumber === numberOfPages || numberOfPages === 0 ? "./assets/img/nextPageNonActive.svg" : "./assets/img/nextPage.svg"} className="page-switcher-img" alt="" />
+                    }} style={{ cursor: activePageNumber >= numberOfPages || numberOfPages === 0 ? 'default' : 'pointer' }} src={activePageNumber === numberOfPages || numberOfPages === 0 ? "./assets/img/Footer-next-page-not-active.svg" : "./assets/img/Footer-next-page.svg"} className="page-switcher-img" alt="" />
                     <img onClick={() => {
                         if (activePageNumber === numberOfPages || numberOfPages === 0) return;
                         onChangeActivePage(numberOfPages)
                     }}
-                        style={{ cursor: activePageNumber === numberOfPages || numberOfPages === 0 ? 'default' : 'pointer' }} src={activePageNumber === numberOfPages || numberOfPages === 0 ? "./assets/img/lastPageArrowNonActive.svg" : "./assets/img/lastPageArrow.svg"} className="page-switcher-img" alt="" />
+                        style={{ cursor: activePageNumber === numberOfPages || numberOfPages === 0 ? 'default' : 'pointer' }} src={activePageNumber === numberOfPages || numberOfPages === 0 ? "./assets/img/Footer-last-page-not-active.svg" : "./assets/img/Footer-last-page.svg"} className="page-switcher-img" alt="" />
                 </div>
             </div>
         </div>

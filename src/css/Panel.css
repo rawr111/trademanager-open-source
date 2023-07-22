@@ -1,22 +1,28 @@
 .panel {
   min-height: 80px;
   border-radius: 16px;
-  background: rgba(33, 18, 40, 0.65);
-  width: 100%;
+  background: #1F1227;
   margin-bottom: 14px;
-  padding: 0px 17px 0px 29px;
   display: flex;
   align-items: center;
   user-select: none;
+  overflow-x: auto;
+}
+
+.panel::-webkit-scrollbar-track {
+  padding-bottom: 10px;
+  border-radius: 0 0 5px 5px;
 }
 
 .panel__title {
-  margin-right: 30px;
   white-space: nowrap;
 }
 
 .panel__content {
   width: 100%;
+  min-width: fit-content;
+  padding-left: 20px;
+  padding-right: 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -30,4 +36,15 @@
 .header-content__buttons-container {
   display: flex;
   margin-right: 10px;
+}
+
+@media screen and (max-width: 1200px) {
+  .panel__title {
+    display: none;
+  }
+
+  .panel__content {
+    width: 100%;
+    justify-content: center;
+  }
 }

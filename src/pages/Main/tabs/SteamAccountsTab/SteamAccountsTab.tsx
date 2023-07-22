@@ -19,6 +19,7 @@ const SteamAccountsTab: FC = observer(() => {
                 <SteamAccountsPanel />
                 <SteamAccountsTable /> 
                 <SteamAccountsFooter />
+                <div></div>
             </div>
             <SteamAccountsCreationForm />
             <SteamAccountsEditForm />

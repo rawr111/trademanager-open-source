@@ -1,36 +1,11 @@
+.navigation {
+  flex: 0 0 auto;
+}
+
 .main {
+  flex-grow: 1;
+  overflow: auto;
   display: flex;
   flex-direction: column;
-  width: 100%;
-}
-
-.header {
-  min-height: 80px;
-  border-radius: 16px;
-  background-color: #211228a6;
-  width: 100%;
-  margin-bottom: 14px;
-}
-
-.accounts {
-  height: 100%;
-  width: 100%;
-  display: flex;
-  background: #211228a6;
-  border-radius: 16px;
-  margin-bottom: 17px;
-}
-
-@media (min-width: 1200px) {
-  .main {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    padding-left: 12px;
-    width: calc(100% - 228px);
-  }
-}
-
-#root {
-  padding-right: 20px;
+  padding-bottom: 20px;
 }

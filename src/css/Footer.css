@@ -1,32 +1,68 @@
 .footer {
-    min-height: 68px;
-    width: 100%;
-    background: #211228A6;
-    border-radius: 16px;
-    margin-bottom: 17px;
-    padding: 0px 18px 0px 15px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-.footer__accounts-number{
-
-}
-
-.footer__select-number{
-  margin-right: 40px;
-}
-
-.footer__info{
-    margin-left: 5px;
-}
-
-.footer__control{
+  margin-top: 20px;
+  min-height: 68px;
+  width: 100%;
+  background: #1F1227;
+  border-radius: 16px;
+  padding: 0px 18px 0px 15px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  overflow-x: auto;
+  white-space: nowrap;
 }
 
-.footer__button{
+.footer::-webkit-scrollbar-track {
+  border-radius: 0 0 5px 5px;
+}
+
+.footer__info {
+  margin-left: 5px;
+}
+
+.footer__control {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer__button {
   margin-right: 10px;
+}
+
+.footer__wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  min-width: fit-content;
+}
+
+@media screen and (max-width: 1250px) {
+  .footer {
+    min-height: 130px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  .footer__accounts-number {
+    width: 100%;
+    min-width: fit-content;
+  }
+
+  .table-footer-left {
+    justify-content: center;
+  }
+
+  .footer__control {
+    width: 100%;
+    min-width: fit-content;
+    justify-content: center;
+  }
+
+  .footer__wrapper {
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
 }

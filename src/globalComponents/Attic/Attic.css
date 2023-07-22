@@ -1,14 +1,18 @@
 .attic {
     user-select: none;
-    height: 35px;
     display: flex;
     justify-content: start;
     padding-left: 20px;
+    padding-right: 20px;
+    background-color: #1F1F1F;
+    margin-bottom: 10px;
+    border-radius: 0 0 15px 15px;
 }
 
 .attic__drag {
     width: 100%;
     padding-top: 10px;
+    padding-bottom: 10px;
     font-size: 13px;
     -webkit-app-region: drag;
 }
@@ -18,10 +22,11 @@
 }
 
 .attic__button {
-    width: 32px;
-    padding-left: 10px;
-    padding-right: 10px;
+    width: 40px;
+    padding-left: 15px;
+    padding-right: 15px;
 }
+
 
 .attic__button--maximize:hover {
     background-color: #372447;

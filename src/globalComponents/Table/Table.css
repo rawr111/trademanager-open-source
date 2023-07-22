@@ -1,15 +1,24 @@
 .table__wrapper {
   overflow-x: auto;
   height: 100%;
-  background-color: #23132C;
-  border-radius: 10px;
+}
+
+.table__wrapper::-webkit-scrollbar-track {
+  margin-left: 100px;
+  margin-right: 100px;
+  margin-top: 39px;
+  margin-bottom: 39px;
 }
 
 .table {
   display: flex;
+  overflow-y: auto;
   flex-direction: column;
   width: 100%;
   height: 100%;
+  background-color: #1F1227;
+  border-radius: 10px;
+  padding-bottom: 10px;
 }
 
 .table__row {

@@ -2,8 +2,8 @@ export default {
     mainWindow: {
         width: 1920,
         height: 1080,
-        minWidth: 1024,
-        minHeight: 768,
+        minWidth: 740,
+        minHeight: 530,
         maxWidth: 3840,
         maxHeight: 2160,
         frame: false,

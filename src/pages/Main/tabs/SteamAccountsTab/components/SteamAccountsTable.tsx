@@ -16,7 +16,7 @@ import uuid from "react-uuid";
 
 const SteamAccountsTableWrapper: FC = () => {
   const fields = store.steamAccountsTable.getFields();
-  return <SteamAccountsTable fields={fields} />;
+  return <SteamAccountsTable fields={fields} />
 };
 
 const SteamAccountsTable: FC<{ fields: Field[] }> = observer(({ fields }) => {
@@ -36,7 +36,7 @@ const SteamAccountsTable: FC<{ fields: Field[] }> = observer(({ fields }) => {
     <Table
       onChangeFieldWidth={(type, newWidth) => {
         const field = fields.find(f => f.type == type);
-        if (field){
+        if (field) {
           field.width = newWidth;
           console.log(fields);
           console.log(type, newWidth);

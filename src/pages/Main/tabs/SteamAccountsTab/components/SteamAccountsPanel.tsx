@@ -37,6 +37,10 @@ const ProxiesPanel = observer(() => {
                     }}
                     altText="Установить код шифрования. Ваши данные будут шифроваться"
                 /> */}
+                    <Search onChange={(value) => {
+                        console.log(value);
+                        store.steamAccountsTable.search(value);
+                    }}></Search>
                     <Button
                         view="icon"
                         hoverColor="gradient"
@@ -78,12 +82,6 @@ const ProxiesPanel = observer(() => {
                         }}
                         altText="Перезагрузить все данные"
                     />
-
-                    <Search onChange={(value) => {
-                        console.log(value);
-                        store.steamAccountsTable.search(value);
-                    }}></Search>
-
 
                     <Button
                         size="large"

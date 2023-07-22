@@ -5,13 +5,9 @@ import store from "../../../../store/store";
 import { observer } from "mobx-react";
 
 const Navigation = observer(() => {
-
   return (
     <div className="navigation">
       <div className="navigation__content">
-        <div className="navigation__logo-container">
-          <img src="./assets/img/Logo.svg" className="navigation__logo" />
-        </div>
 
         <div className="navigation__buttons">
           <div className="navigation__button">

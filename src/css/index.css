@@ -3,22 +3,27 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 .alt-text-container {
   width: 400px;
 }
+
 .mini-download {
   width: 50px;
   height: 20px;
 }
-.micro-download{
+
+.micro-download {
   margin: auto;
   width: 20px;
   height: 20px;
 }
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
 html {
   overflow: hidden;
 }
@@ -43,7 +48,7 @@ button {
   color: #776284;
 }
 
-.text-pink-small{
+.text-pink-small {
   font-family: "Nunito";
   font-style: normal;
   font-weight: 400;
@@ -60,6 +65,7 @@ button {
   line-height: 19px;
   color: #776284;
 }
+
 .text-grey-large {
   font-family: "Nunito";
   font-style: normal;
@@ -88,6 +94,7 @@ button {
   line-height: 19px;
   color: #ffffff;
 }
+
 .text-white-large {
   font-family: "Nunito";
   font-style: normal;
@@ -130,18 +137,26 @@ p {
 }
 
 div::-webkit-scrollbar {
-  height: 3px;
-  width: 3px;
+  height: 10px;
+  width: 10px;
 }
 
 div::-webkit-scrollbar-track {
-  background: rgba(119, 98, 132, 0.13);
-  border-radius: 16px;
-  transform: matrix(-1, 0, 0, 1, 0, 0);
+  /* background: rgba(119, 98, 132, 0.13);
+  transform: matrix(-1, 0, 0, 1, 0, 0); */
+  background-color: #2F213B;
+  border-radius: 5px;
 }
 
 div::-webkit-scrollbar-thumb {
+  border-radius: 5px;
   background: linear-gradient(121.85deg, #ff00e5 2.04%, #7000ff 108.41%);
-  border-radius: 16px;
   transform: matrix(-1, 0, 0, 1, 0, 0);
+}
+
+.content {
+  height: 100%;
+  display: flex;
+  gap: 20px;
+  padding-right: 20px;
 }

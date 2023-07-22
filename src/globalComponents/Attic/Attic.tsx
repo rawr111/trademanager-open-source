@@ -11,7 +11,7 @@ const Attic: FC<{
     return (
         <div className='attic'>
             <div className='attic__drag'>
-                {props.title ? props.title : "Pinkest.dev"}
+                {props.title ? props.title : "Steam Trademanager"}
             </div>
             <div className='attic__buttons'>
                 <img className='attic__button attic__button--minimize' src="./assets/img/Chrome-minimize.svg" alt="" onClick={() => {
