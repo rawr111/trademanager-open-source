@@ -7,9 +7,7 @@ import SmaFile from "../../interfaces/SteamAccount/SmaFileInterface";
 import ChangableSecondaryInterface from "../../interfaces/SteamAccount/ChangableSecondaryInterface";
 import steamAccountManager from "./steamAccountManager";
 import SteamCommunity from "steamcommunity";
-import convertSessionToCookies from "../Functions/convertSessionToCookies";
 import Session from "../../interfaces/SteamAccount/SessionInterface";
-import convertCookiesToSession from "../Functions/convertCookiesToSession";
 import { getSecondaries, getChangableSecondaries } from './Processes/loadSteamAccountData';
 import CConfirmation from "steamcommunity/classes/CConfirmation";
 import SecondaryInterface from "../../interfaces/SteamAccount/SecondaryInterface";
@@ -18,6 +16,10 @@ import request from "request";
 import Manager from "../manager/manager";
 import askFamilyPin from "../application/askInfo/askFamilyPin";
 import Chrome from './Chrome/Chrome';
+import { EAuthSessionGuardType, EAuthTokenPlatformType, LoginSession } from "steam-session";
+import maFileLogin from "./Processes/maFileLogin";
+import askMailCode from "../application/askInfo/askMailCode";
+import SessionInterface from "../../interfaces/SteamAccount/SessionInterface";
 const SteamTotp = require('steam-totp');
 
 class SteamAccount {
@@ -26,6 +28,8 @@ class SteamAccount {
     community: SteamCommunity;
     isAskingFamilyPin: boolean;
     chrome: Chrome;
+    session: LoginSession;
+    proxy: ProxyInterface | null;
 
     constructor(params: SteamAccountInterface) {
         this.setupParams = {
@@ -38,46 +42,89 @@ class SteamAccount {
         this.chrome = new Chrome(params);
         this.params = params;
         this.community = new SteamCommunity();
+        this.session = new LoginSession(EAuthTokenPlatformType.MobileApp);
 
         this.isAskingFamilyPin = false;
         const links = Manager.GetSteamAccountLinkedData(this.params.id);
+        this.proxy = null;
         if (links.proxy) {
+            this.proxy = links.proxy;
             this.setProxy(links.proxy)
         }
+    }
 
-        const cookies = convertSessionToCookies(this.params.maFile.Session);
-        
-        try {
-            this.community.setCookies(cookies);
-        } catch (err){
-            
-        }
+
+    async initSession() {
+        return new Promise(async (resolve, reject) => {
+            try {
+                if (this.params.maFile.Session && this.params.maFile.Session.AccessToken && this.params.maFile.Session.RefreshToken) {
+                    this.session.accessToken = this.params.maFile.Session.AccessToken;
+                    this.session.refreshToken = this.params.maFile.Session.RefreshToken;
+                    await this.session.refreshAccessToken();
+                    const cookies = await this.session.getWebCookies();
+                    console.log(`${this.params.id} - cookies loaded`);
+                    this.community.setCookies(cookies);
+                    resolve(undefined);
+                }
+
+            } catch (err) {
+                console.log(err);
+            }
+        });
     }
 
     setProxy(proxy: ProxyInterface | null) {
         try {
-            if (!proxy) {
-                return this.community = new SteamCommunity({ request: request });
+            this.proxy = proxy;
+            if (proxy) {
+                this.session = new LoginSession(EAuthTokenPlatformType.MobileApp, {
+                    httpProxy: `http://${proxy.username}:${proxy.password}@${proxy.host}:${proxy.port}`
+                });
+                const proxyRequest = request.defaults({ proxy: `http://${proxy.username}:${proxy.password}@${proxy.host}:${proxy.port}` });
+                this.community = new SteamCommunity({ request: proxyRequest });
             }
-            const proxyRequest = request.defaults({ proxy: `http://${proxy.username}:${proxy.password}@${proxy.host}:${proxy.port}` });
-            this.community = new SteamCommunity({ request: proxyRequest });
         } catch (err) {
             throw new Error(`Error in setProxy: ${err}`);
         }
     }
+
     loginByPassword(): Promise<void> {
-        return new Promise((resolve, reject) => {
-            const loginOptions = {
+        return new Promise(async (resolve, reject) => {
+            const result = await this.session.startWithCredentials({
                 accountName: this.params.accountName,
                 password: this.params.password,
-                twoFactorCode: SteamTotp.generateAuthCode(this.params.maFile.shared_secret),
-                disableMobile: true
-            }
-            this.community.login(loginOptions, (err, sid, cookies, steamguard,) => {
-                if (err) return reject(err);
+                steamGuardCode: SteamTotp.generateAuthCode(this.params.maFile.shared_secret)
+            });
 
-                const session = convertCookiesToSession(cookies, encodeURI(steamguard));
-                this.saveSession(session);
+            if (result.actionRequired && result.validActions) {
+                if (result.validActions.map(el => el.type).includes(EAuthSessionGuardType.EmailCode)) {
+                    const code = await askMailCode(this.params.accountName, this.params.accountName);
+                    await this.session.submitSteamGuardCode(code);
+                }
+            }
+
+            this.session.on("error", (err) => {
+                reject(err);
+            });
+            this.session.on("timeout", () => {
+                reject("timeout");
+            });
+            this.session.on("authenticated", async () => {
+                const accessToken = this.session.accessToken;
+                const refreshToken = this.session.refreshToken;
+                const steamID = this.session.steamID;
+                const cookies = await this.session.getWebCookies();
+                console.log(cookies);
+                this.community.setCookies(cookies);
+                //const oldSession = convertCookiesToSession(cookies);
+                const newSession: SessionInterface = {
+                    AccessToken: accessToken,
+                    RefreshToken: refreshToken,
+                    SteamID: steamID.toString(),
+                    SessionID: ""
+                }
+                console.log(newSession);
+                this.saveSession(newSession);
                 resolve();
             });
         });
@@ -187,7 +234,8 @@ class SteamAccount {
     async saveSession(session: Session) {
         try {
             this.params.maFile.Session = session;
-            await this.editParams({ maFile: this.params.maFile });
+            console.log(this.params.maFile);
+            this.editParams({ maFile: this.params.maFile });
         } catch (err) {
             throw new Error(`Не удалось сохранить сессию: ${err}`);
         }

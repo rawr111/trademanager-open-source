@@ -111,9 +111,8 @@ class SteamAccountsTableStore {
         this.steamAccounts[data.id].isLogining = false;
       });
       this.root.windows.openMiniNotification({
-        text: `Не удалось обновить сессию аккаунта #${
-          this.steamAccounts[data.id].number
-        }: ${data.err}`,
+        text: `Не удалось обновить сессию аккаунта #${this.steamAccounts[data.id].number
+          }: ${data.err}`,
         type: "error",
       });
     });
@@ -121,6 +120,12 @@ class SteamAccountsTableStore {
       runInAction(() => {
         this.initialSteamAccounts = steamAccounts;
       });
+
+      setTimeout(() => {
+        for (var i of steamAccounts) {
+          this.loadChangableSecondaries(i.id);
+        }
+      }, 3000);
       this.setSteamAccounts(steamAccounts);
       this.setActivePage(this.activePage);
     });
@@ -322,7 +327,7 @@ class SteamAccountsTableStore {
     const sa: TableSteamAccountInterface[][] = [];
     let count = 0;
     let bufAccounts: TableSteamAccountInterface[] = [];
-    for (var i of Object.values(this.getSteamAccounts()).filter(sa=>!this.hidenSteamAccountsId.includes(sa.id))) {
+    for (var i of Object.values(this.getSteamAccounts()).filter(sa => !this.hidenSteamAccountsId.includes(sa.id))) {
       if (i.deleted && !this.showDeleted) continue;
 
       if (count === this.pageSize) {
@@ -352,7 +357,7 @@ class SteamAccountsTableStore {
       this.getSteamAccountsByPages()[this.activePage - 1];
     if (
       steamAccountsInPage.filter((p) => p.isSelected).length ===
-        steamAccountsInPage.filter((p) => !p.deleted).length &&
+      steamAccountsInPage.filter((p) => !p.deleted).length &&
       steamAccountsInPage.filter((p) => !p.deleted).length !== 0
     ) {
       this.isAllSelected = true;

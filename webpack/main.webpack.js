@@ -12,6 +12,8 @@ module.exports = {
     'puppeteer-extra-plugin-stealth': 'puppeteer-extra-plugin-stealth',
     'sharp': 'sharp',
     'puppeteer-extra-plugin-minmax': 'puppeteer-extra-plugin-minmax',
-    'chromium':'chromium'
+    'chromium': 'chromium',
+    'steam-session': 'steam-session',
+    'steamcommunity': 'steamcommunity'
   },
 };

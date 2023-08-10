@@ -28,9 +28,9 @@ const SteamDataCode: FC = observer(() => {
         <h1>Проверьте данные:</h1><br />
         <div>Логин Steam: {params.accountName ? params.accountName : "не установлено"}</div>
         <div>Пароль Steam: {params.password ? params.password : "не установлено"}</div>
-        <div>Прокси: {"ABOA" ? "gfsa" : "не установлено"}</div><br />
+        <br />
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <Button text="Назад" size="medium" color="grey" isNonGuardButton={false} hoverColor='light-grey' style={{marginRight: '20px'}} onClick={() => {
+          <Button text="Назад" size="medium" color="grey" isNonGuardButton={false} hoverColor='light-grey' style={{ marginRight: '20px' }} onClick={() => {
             setCurrentPage('start');
           }}></Button>
           <Button disabled={!(params.accountName && params.password)} isNonGuardButton={false} text="Подключить" size="medium" onClick={() => {

@@ -7,7 +7,6 @@ import SmaFileInterface from "../../../interfaces/SteamAccount/SmaFileInterface"
 import application from "../../application/application";
 import askSmsCode from "../../application/askInfo/askSmsCode";
 import askMailCode from "../../application/askInfo/askMailCode";
-import convertCookiesToSession from "../../Functions/convertCookiesToSession";
 import { getSecondaries } from "./loadSteamAccountData";
 import { v4 as uuidv4 } from "uuid";
 import TwoFactorResponseInterface from "../../../interfaces/SteamAccount/TwoFactorResponseInterface";
@@ -38,6 +37,7 @@ export default async function setupGuard(
 ): Promise<SmaFileInterface> {
   return new Promise(async (resolve, reject) => {
     let community = new SteamCommunity();
+    const session = new LoginSession(EAuthTokenPlatformType.MobileApp, { httpProxy: proxy ? `http://${proxy.username}:${proxy.password}@${proxy.host}:${proxy.port}` : undefined });
     if (proxy) {
       const proxyRequest = request.defaults({
         proxy: `http://${proxy.username}:${proxy.password}@${proxy.host}:${proxy.port}`,
@@ -61,11 +61,10 @@ export default async function setupGuard(
     ): Promise<MaFileInterface> => {
       return new Promise<MaFileInterface>((resolve, reject) => {
         nextStep("loginByPassword");
-        const session = new LoginSession(EAuthTokenPlatformType.MobileApp);
         session
           .startWithCredentials({
             accountName,
-            password,
+            password
           })
           .then(async ({ actionRequired, validActions }) => {
             if (actionRequired) {
@@ -183,11 +182,15 @@ export default async function setupGuard(
               await promtSmsCode(rawMaFile);
               const maFile: MaFileInterface = {
                 ...rawMaFile,
-                Session: convertCookiesToSession(cookies),
+                Session: {
+                  AccessToken: session.accessToken,
+                  RefreshToken: session.refreshToken,
+                  SessionID: "",
+                  SteamID: session.steamID.toString()
+                },
                 device_id: SteamTotp.getDeviceID(session.steamID),
                 fully_enrolled: true,
               };
-              maFile.Session.SteamID = session.steamID.toString();
               console.log(maFile);
               resolve(maFile);
             });

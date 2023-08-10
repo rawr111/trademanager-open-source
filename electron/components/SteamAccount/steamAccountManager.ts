@@ -46,13 +46,15 @@ export class SteamAccountManager {
             throw new Error(`Cant edit steam account: ${err}`);
         }
     }
-    load() {
+    async load() {
         try {
             const objects = SteamAccountStorage.GetAll();
             const objectsArray = Object.values(objects);
             this.objects = [];
+            
             for (var object of objectsArray) {
                 const steamAccount = new SteamAccount(object);
+                steamAccount.initSession();
                 this.addNew(steamAccount);
             }
             this.sendAccountsToFront();
