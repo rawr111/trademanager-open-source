@@ -1,6 +1,11 @@
 # trademanager-open-source
+![screen1](https://github.com/pinkest-dev/trademanager-open-source/assets/70286254/c81ddb29-dc20-4388-b6c2-139487c65e80)![screen3](https://github.com/pinkest-dev/trademanager-open-source/assets/70286254/9f18e27b-b5ce-4715-a503-d952c7fd7161)
+![screen2](https://github.com/pinkest-dev/trademanager-open-source/assets/70286254/ab84c95c-12ec-4c0b-bdab-db4097f7d65c)
 
-ГАЙД ПО ИСПОЛЬЗОВАНИЮ ТУТ - https://telegra.ph/Otkrytyj-manual-po-Trade-Manager-06-30<br/>
+
+
+
+РУКОВОДСТВО ПО ИСПОЛЬЗОВАНИЮ ТУТ - https://telegra.ph/Otkrytyj-manual-po-Trade-Manager-06-30<br/>
 Скачать последнюю версию: https://github.com/rawr111/trademanager-open-source/releases/latest
 
 Как собрать проект:
